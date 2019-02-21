@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+// Commit thành công cmnr anh em ơi
+
 import { 
     StyleSheet,
     Text,
@@ -35,6 +37,10 @@ export default class Main extends Component {
             get_img: '',
             get_name: '',
             get_code: '',
+            kaiser: '',
+            Text: '',
+            Text1: '',
+            Text2: '',
         };
 
     }
