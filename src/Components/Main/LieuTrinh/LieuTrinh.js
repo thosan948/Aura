@@ -17,6 +17,7 @@ import ic_setting from '../../../Media/Icon/setting.png';
 // Import Dependencies
 import LinearGradient from 'react-native-linear-gradient';
 import NumberFormat from 'react-number-format';
+import OpenSettings from 'react-native-open-settings';
 import {
     SCLAlert,
     SCLAlertButton,
@@ -35,7 +36,10 @@ export default class Status extends Component {
         super(props);
         this.state = {
             show_false: false,
+            checkWifi: false,
             fail: '',
+            fail: '',
+            check_erro: '',
             emdn: '',
             checked: false,
             dataSource: [],
@@ -60,9 +64,11 @@ export default class Status extends Component {
         NetInfo.getConnectionInfo().then((connectionInfo) => {
             if(connectionInfo.type == "none"){
                 this.setState({ 
-                    show_false: true, 
+                    checkWifi: true,
                     fail: 'Lỗi kết nối',
                     check_erro: 'Bạn hãy kiểm tra lại kết nối Internet hoặc Wifi',
+                    show_false: true, 
+
                 })
             }else{
 
@@ -111,6 +117,15 @@ export default class Status extends Component {
 
     }
 
+    handleWifi = () => {
+
+        this.setState({ 
+            show_false: false,
+            checkWifi: false,
+        });
+        OpenSettings.openSettings();
+
+    }
     handleClose = () => {
 
         this.setState({ 
@@ -128,6 +143,23 @@ export default class Status extends Component {
     }
 
     render() {
+
+        const OK_Wifi = (
+            <SCLAlertButton theme="info" onPress={this.handleWifi}>OK</SCLAlertButton>
+        );
+        const OK_TB = (
+            <SCLAlertButton theme="info" onPress={this.handleClose}>OK</SCLAlertButton>
+        );
+
+        let Thongbao;
+
+        if(this.state.checkWifi == true){
+
+            Thongbao = OK_Wifi;
+
+        }else{
+            Thongbao = OK_TB;
+        }
 
         return (
             
@@ -288,8 +320,8 @@ export default class Status extends Component {
                                             title={this.state.fail}
                                             subtitle={this.state.check_erro}>
 
-                                            <SCLAlertButton theme="info" onPress={this.handleClose}>OK</SCLAlertButton>
-
+                                            {/* <SCLAlertButton theme="info" onPress={this.handleClose}>OK</SCLAlertButton> */}
+                                            {Thongbao}
                                         </SCLAlert>
                                         
                                     </ScrollView>

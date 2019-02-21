@@ -19,6 +19,8 @@ import {
 import ic_Background from '../../Media/Background/BackgroundLogin.png';
 import ic_logo from '../../Media/Logo/aura.png'
 import ic_bg from '../../Media/Background/bg.png';
+import ic_user from '../../Media/Icon/ic_user.png';
+import ic_lock from '../../Media/Icon/lock.png';
 
 
 // Import Dependencies
@@ -28,6 +30,7 @@ import {
 } from 'react-native-scl-alert';
 import { Checkbox } from 'react-native-paper';
 import Spinner from 'react-native-loading-spinner-overlay';
+import OpenSettings from 'react-native-open-settings';
 
 
 // Get Width - Height
@@ -42,6 +45,8 @@ export default class Login extends Component {
         this.state = {
             visible: false,
             show_false: false,
+            show_check: false,
+            checkWifi: false,
             id : '',
             cuscode: '',
             cusname: '',
@@ -64,7 +69,6 @@ export default class Login extends Component {
     componentDidMount() {
         BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
         this._GetData();
-        this._CheckConnect();
 
     }
 
@@ -85,32 +89,6 @@ export default class Login extends Component {
         navigation.pop();
         return true;
 
-    }
-
-    _CheckConnect(){
-
-        NetInfo.getConnectionInfo().then((connectionInfo) => {
-            console.log(
-              'Initial, type: ' +
-                connectionInfo.type +
-                ', effectiveType: ' +
-                connectionInfo.effectiveType,
-            );
-          });
-
-        function handleFirstConnectivityChange(connectionInfo) {
-            console.log(
-              'First change, type: ' +
-                connectionInfo.type +
-                ', effectiveType: ' +
-                connectionInfo.effectiveType,
-            );
-            NetInfo.removeEventListener(
-                'connectionChange',
-                handleFirstConnectivityChange,
-            );
-        }
-        NetInfo.addEventListener('connectionChange', handleFirstConnectivityChange);
     }
 
     _GetData = async () => {
@@ -175,136 +153,162 @@ export default class Login extends Component {
         this.props.navigation.push('Registration');
     };
 
+    handleWifi = () => {
+
+        this.setState({ 
+            show_false: false,
+            checkWifi: false,
+        });
+        OpenSettings.openSettings();
+        
+    }
+
     handleClose = () => {
 
         this.setState({ 
-            show_false: false 
+            show_false: false
         })
 
     }
 
 	Login() {
 
-        this.setState({visible: true});
+        NetInfo.getConnectionInfo().then((connectionInfo) => {
+            if(connectionInfo.type == "none"){
+                this.setState({ 
+                    checkWifi: true,
+                    show_check: true, 
+                    fail: 'Lỗi kết nối',
+                    check_erro: 'Bạn hãy kiểm tra lại kết nối Internet hoặc Wifi',
+                });
+            } else {
+                this.setState({visible: true});
 
-		check_Phone = this.state.emdn;			
-        check_Pass = this.state.passdn;
-
-		if ( check_Phone == "" || check_Pass == "" ) {
-
-			this.setState({
-                visible: false,
-				fail: "Đăng nhập thất bại",
-				check_erro: "Bạn cần nhập đầy đủ tất cả các thông tin",
-				show_false: true
-            });
-            
-		}else if( check_Phone == null || check_Pass == null ) {
-
-			this.setState({
-                visible: false,
-				fail: "Đăng nhập thất bại",
-				check_erro: "Bạn cần nhập đầy đủ tất cả các thông tin",
-				show_false: true
-            });
-            
-		}else{
-
-			fetch("http://library.limcom.vn/API/login.php", {
-
-				method: "POST",
-
-				headers: {
-					"Accept": "application/json",
-					"Content-Type": "application/json",
-				},
-
-				body: JSON.stringify({
-					"PHONE": check_Phone,		// POST biến MAIL
-					"PASS": check_Pass
-				})
-
-			})
-
-			.then((response) => response.json())
-
-			.then((responseJson) => {
-
-					if (responseJson.info.Result == "1") {					
-						info_id = responseJson.info.id;					
-						info_cuscode = responseJson.info.cuscode;			
-						info_cusname = responseJson.info.cusname;
-						info_cusphone = responseJson.info.cusphone;
-						info_birthdate = responseJson.info.birthdate;
-						info_cmnd = responseJson.info.cmnd;
-						info_gender = responseJson.info.gender;
-						info_tinh = responseJson.info.tinh;
-						info_diachi = responseJson.info.diachi;
-						info_quan = responseJson.info.quan;
-                        info_image = responseJson.info.image;
-                        console.log(info_diachi)
-                        
-                        if(info_diachi == null){
-                            info_diachi = " "
-                        }
-                        if (info_quan == null){
-                            info_quan = " "
-                        }
-                        if (info_tinh == ""){
-                            info_tinh = " "
-                        }
-                        this.setState({
-                            id : info_id,
-                            cuscode: info_cuscode,
-                            cusname: info_cusname,
-                            cusphone: info_cusphone,
-                            birthdate: info_birthdate,
-                            cmnd: info_cmnd,
-                            gender: info_gender,
-                            tinh: info_tinh,
-                            quan: info_quan,
-                            diachi: info_diachi,
-                            image: info_image
-                        });
-						this.gotoMain();
-
-					} else if (responseJson.info.Result == "0") {				
-						
-						this.setState({
-                            visible: false,
-							fail: "Đăng nhập thất bại",
-							check_erro: "Email hoặc mật khẩu không chính xác",
-							show_false: true
-						});
-
-					}else{
-
-                        this.setState({
-                            visible: false,
-							fail: "Đăng nhập thất bại",
-							check_erro: "Bạn hãy kiểm tra lại kết nối Internet",
-							show_false: true
-                        });
-                        
-                    }
-
-				},
-
-			)
-			.catch((error) => {
-
-					console.log(error)				
-					this.setState({
+                check_Phone = this.state.emdn;			
+                check_Pass = this.state.passdn;
+        
+                if ( check_Phone == "" || check_Pass == "" ) {
+        
+                    this.setState({
                         visible: false,
-						fail: "Đăng nhập thất bại",
-						check_erro: "Bạn hãy kiểm tra lại kết nối Internet",
-						show_false: true
-					});
+                        fail: "Đăng nhập thất bại",
+                        check_erro: "Bạn cần nhập đầy đủ tất cả các thông tin",
+                        show_false: true
+                    });
+                    
+                }else if( check_Phone == null || check_Pass == null ) {
+        
+                    this.setState({
+                        visible: false,
+                        fail: "Đăng nhập thất bại",
+                        check_erro: "Bạn cần nhập đầy đủ tất cả các thông tin",
+                        show_false: true
+                    });
+                    
+                }else{
+        
+                    fetch("http://library.limcom.vn/API/login.php", {
+        
+                        method: "POST",
+        
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json",
+                        },
+        
+                        body: JSON.stringify({
+                            "PHONE": check_Phone,		// POST biến MAIL
+                            "PASS": check_Pass
+                        })
+        
+                    })
+        
+                    .then((response) => response.json())
+        
+                    .then((responseJson) => {
+        
+                            if (responseJson.info.Result == "1") {					
+                                info_id = responseJson.info.id;					
+                                info_cuscode = responseJson.info.cuscode;			
+                                info_cusname = responseJson.info.cusname;
+                                info_cusphone = responseJson.info.cusphone;
+                                info_birthdate = responseJson.info.birthdate;
+                                info_cmnd = responseJson.info.cmnd;
+                                info_gender = responseJson.info.gender;
+                                info_tinh = responseJson.info.tinh;
+                                info_diachi = responseJson.info.diachi;
+                                info_quan = responseJson.info.quan;
+                                info_image = responseJson.info.image;
+                                console.log(info_diachi)
+                                
+                                if(info_diachi == null){
+                                    info_diachi = " "
+                                }
+                                if (info_quan == null){
+                                    info_quan = " "
+                                }
+                                if (info_tinh == ""){
+                                    info_tinh = " "
+                                }
+                                this.setState({
+                                    id : info_id,
+                                    cuscode: info_cuscode,
+                                    cusname: info_cusname,
+                                    cusphone: info_cusphone,
+                                    birthdate: info_birthdate,
+                                    cmnd: info_cmnd,
+                                    gender: info_gender,
+                                    tinh: info_tinh,
+                                    quan: info_quan,
+                                    diachi: info_diachi,
+                                    image: info_image
+                                });
+                                this.gotoMain();
+        
+                            } else if (responseJson.info.Result == "0") {				
+                                
+                                this.setState({
+                                    visible: false,
+                                    fail: "Đăng nhập thất bại",
+                                    check_erro: "Số điện thoại hoặc mật khẩu không chính xác",
+                                    show_false: true
+                                });
+        
+                            }else{
+        
+                                this.setState({
+                                    visible: false,
+                                    fail: "Đăng nhập thất bại",
+                                    check_erro: "Bạn hãy kiểm tra lại kết nối Internet",
+                                    show_false: true
+                                });
+                                
+                            }
+        
+                        },
+        
+                    )
+                    .catch((error) => {
+        
+                            console.log(error)				
+                            this.setState({
+                                visible: false,
+                                fail: "Đăng nhập thất bại",
+                                check_erro: "Bạn hãy kiểm tra lại kết nối Internet",
+                                show_false: true
+                            });
+        
+                        }
+        
+                    );
 
-				}
+                }
 
-			);
-		}
+            }
+
+        });
+
+
 
     }
     
@@ -315,6 +319,23 @@ export default class Login extends Component {
     render() {
 
         const { checked } = this.state;
+
+        const OK_Wifi = (
+            <SCLAlertButton theme="info" onPress={this.handleWifi}>OK</SCLAlertButton>
+        );
+        const OK_TB = (
+            <SCLAlertButton theme="info" onPress={this.handleClose}>OK</SCLAlertButton>
+        );
+
+        let Thongbao;
+
+        if(this.state.checkWifi == true){
+
+            Thongbao = OK_Wifi;
+            
+        }else{
+            Thongbao = OK_TB;
+        }
 
         return (
             
@@ -346,23 +367,35 @@ export default class Login extends Component {
 
                             <View style = {styles.view_input}>
 
-                                <TextInput
-                                    onChangeText={(emdn) => this.setState({ emdn })}
-                                    value={this.state.emdn}
-                                    placeholderTextColor='#e4e2e4'
-                                    placeholder='Số điện thoại'
-                                    keyboardType="email-address"
-                                    underlineColorAndroid='#fff'
-                                    style={styles.TextInput} />
+                                <View style={styles.fromDN}>
 
-                                <TextInput
-                                    onChangeText={(passdn) => this.setState({ passdn })}
-                                    value={this.state.passdn}
-                                    placeholderTextColor='#e4e2e4'
-                                    placeholder='Mật khẩu'
-                                    secureTextEntry
-                                    underlineColorAndroid='#fff'
-                                    style={styles.TextInput} />
+                                    <Image source={ic_user} style={styles.ImageStyle} />
+
+                                    <TextInput
+                                        onChangeText={(emdn) => this.setState({ emdn })}
+                                        value={this.state.emdn}
+                                        placeholderTextColor='#fff'
+                                        placeholder='Số điện thoại'
+                                        keyboardType="numeric"
+                                        underlineColorAndroid='transparent'
+                                        style={styles.TextInput} />
+
+                                </View>
+
+                                <View style={styles.fromDN}>
+
+                                    <Image source={ic_lock} style={styles.ImageStyle} />
+
+                                    <TextInput
+                                        onChangeText={(passdn) => this.setState({ passdn })}
+                                        value={this.state.passdn}
+                                        placeholderTextColor='#fff'
+                                        placeholder='Mật khẩu'
+                                        secureTextEntry
+                                        underlineColorAndroid='transparent'
+                                        style={styles.TextInput} />
+
+                                </View>
 
                             </View>
 
@@ -417,7 +450,7 @@ export default class Login extends Component {
                                 title={this.state.fail}
                                 subtitle={this.state.check_erro}>
 
-                                <SCLAlertButton theme="info" onPress={this.handleClose}>OK</SCLAlertButton>
+                                {Thongbao}
 
                             </SCLAlert>
 
@@ -466,12 +499,31 @@ const styles = StyleSheet.create({
         textDecorationLine: 'underline'
     },
 
+    fromDN: {
+        width: deviceWidth * .7,
+        flexDirection: 'row',
+        height: 45,
+        borderRadius: 30,
+        borderWidth: 1,
+        borderColor: '#fff',
+        marginBottom: 5,
+    },
+
     view_check:{
         width: deviceWidth * 0.7,
         height: 30,
         flexDirection: 'row',
         justifyContent: 'space-between',
 
+    },
+
+    ImageStyle: {
+        padding: 10,
+        margin: 10,
+        height: 10,
+        width: 10,
+        resizeMode : 'stretch',
+        alignItems: 'center'
     },
 
     image_logo: {

@@ -7,6 +7,7 @@ import {
     SCLAlert,
     SCLAlertButton,
 } from 'react-native-scl-alert';
+import OpenSettings from 'react-native-open-settings';
 
 export default class Router extends Component {
 
@@ -70,15 +71,24 @@ export default class Router extends Component {
             }
         }
         NetInfo.addEventListener('connectionChange', handleFirstConnectivityChange);
-    }
+    };
 
     handleClose = () => {
 
         this.setState({ 
             show_false: false 
-        })
+        });
 
-    }
+    };
+
+    handleOK = () => {
+
+        this.setState({ 
+            show_false: false 
+        });
+        OpenSettings.openSettings();
+
+    };
 
     render(){
 
@@ -95,7 +105,7 @@ export default class Router extends Component {
                     title={this.state.fail}
                     subtitle={this.state.check_erro}>
 
-                    <SCLAlertButton theme="info" onPress={this.handleClose}>OK</SCLAlertButton>
+                    <SCLAlertButton theme="info" onPress={this.handleOK}>OK</SCLAlertButton>
 
                 </SCLAlert>
 

@@ -68,6 +68,9 @@
 		6877A60E64484DDF8AFB7131 /* libBVLinearGradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F98D73258AAE44858383AC07 /* libBVLinearGradient.a */; };
 		0A85BBDE93AC4BB281C24B97 /* libRNQ42Gradient.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 525D30A8F79948E991379A0F /* libRNQ42Gradient.a */; };
 		1B5AF95AEAFE421AA32021AC /* libRNCWebView.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6460B6D64EB147299F5737B5 /* libRNCWebView.a */; };
+		CED2E7A921E542C7BB42BE9D /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B94253FC10949FBB667E3EA /* libReact Native Open Settings.a */; };
+		BCC74B934A5B4F30855B84B3 /* libRNOpenAppSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7047BB9329A444BBB6A790ED /* libRNOpenAppSettings.a */; };
+		835759D4499A49F196D3B81A /* libRNSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DABDE71CFC4B38BC1B1D46 /* libRNSettings.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -409,6 +412,12 @@
 		525D30A8F79948E991379A0F /* libRNQ42Gradient.a */ = {isa = PBXFileReference; name = "libRNQ42Gradient.a"; path = "libRNQ42Gradient.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		CCBD6E33A4F84B70839D31D9 /* RNCWebView.xcodeproj */ = {isa = PBXFileReference; name = "RNCWebView.xcodeproj"; path = "../node_modules/react-native-webview/ios/RNCWebView.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		6460B6D64EB147299F5737B5 /* libRNCWebView.a */ = {isa = PBXFileReference; name = "libRNCWebView.a"; path = "libRNCWebView.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		2CBFCDE83BF64E97AEA4CEA7 /* React Native Open Settings.xcodeproj */ = {isa = PBXFileReference; name = "React Native Open Settings.xcodeproj"; path = "../node_modules/react-native-open-settings/React Native Open Settings.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		9B94253FC10949FBB667E3EA /* libReact Native Open Settings.a */ = {isa = PBXFileReference; name = "libReact Native Open Settings.a"; path = "libReact Native Open Settings.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		43CC4E83FEE94FA79B4522DC /* RNOpenAppSettings.xcodeproj */ = {isa = PBXFileReference; name = "RNOpenAppSettings.xcodeproj"; path = "../node_modules/react-native-app-settings/ios/RNOpenAppSettings.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		7047BB9329A444BBB6A790ED /* libRNOpenAppSettings.a */ = {isa = PBXFileReference; name = "libRNOpenAppSettings.a"; path = "libRNOpenAppSettings.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		9CE7DF657EDF414DBE7AC040 /* RNSettings.xcodeproj */ = {isa = PBXFileReference; name = "RNSettings.xcodeproj"; path = "../node_modules/react-native-settings/ios/RNSettings.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		75DABDE71CFC4B38BC1B1D46 /* libRNSettings.a */ = {isa = PBXFileReference; name = "libRNSettings.a"; path = "libRNSettings.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -442,6 +451,9 @@
 				6877A60E64484DDF8AFB7131 /* libBVLinearGradient.a in Frameworks */,
 				0A85BBDE93AC4BB281C24B97 /* libRNQ42Gradient.a in Frameworks */,
 				1B5AF95AEAFE421AA32021AC /* libRNCWebView.a in Frameworks */,
+				CED2E7A921E542C7BB42BE9D /* libReact Native Open Settings.a in Frameworks */,
+				BCC74B934A5B4F30855B84B3 /* libRNOpenAppSettings.a in Frameworks */,
+				835759D4499A49F196D3B81A /* libRNSettings.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -637,6 +649,9 @@
 				AF9C2010D71A4C948959B52C /* BVLinearGradient.xcodeproj */,
 				ABD5E82500704B52A30F8E41 /* RNQ42Gradient.xcodeproj */,
 				CCBD6E33A4F84B70839D31D9 /* RNCWebView.xcodeproj */,
+				2CBFCDE83BF64E97AEA4CEA7 /* React Native Open Settings.xcodeproj */,
+				43CC4E83FEE94FA79B4522DC /* RNOpenAppSettings.xcodeproj */,
+				9CE7DF657EDF414DBE7AC040 /* RNSettings.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1325,6 +1340,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1333,6 +1351,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-gradient\ios\RNQ42Gradient",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-open-settings",
+					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
 				);
 			};
 			name = Debug;
@@ -1360,6 +1381,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1368,6 +1392,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-gradient\ios\RNQ42Gradient",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-open-settings",
+					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
 				);
 			};
 			name = Release;
@@ -1395,6 +1422,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-gradient\ios\RNQ42Gradient",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-open-settings",
+					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
 				);
 			};
 			name = Debug;
@@ -1421,6 +1451,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-gradient\ios\RNQ42Gradient",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-open-settings",
+					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
 				);
 			};
 			name = Release;
@@ -1456,6 +1489,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1464,6 +1500,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-gradient\ios\RNQ42Gradient",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-open-settings",
+					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
 				);
 			};
 			name = Debug;
@@ -1499,6 +1538,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1507,6 +1549,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-gradient\ios\RNQ42Gradient",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-open-settings",
+					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
 				);
 			};
 			name = Release;
@@ -1541,6 +1586,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1549,6 +1597,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-gradient\ios\RNQ42Gradient",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-open-settings",
+					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
 				);
 			};
 			name = Debug;
@@ -1583,6 +1634,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1591,6 +1645,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-linear-gradient\BVLinearGradient",
 					"$(SRCROOT)\..\node_modules\react-native-gradient\ios\RNQ42Gradient",
 					"$(SRCROOT)\..\node_modules\react-native-webview\ios",
+					"$(SRCROOT)\..\node_modules\react-native-open-settings",
+					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
 				);
 			};
 			name = Release;

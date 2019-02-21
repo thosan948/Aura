@@ -267,17 +267,17 @@ export default class Registration extends Component {
 
                                 <View style={styles.fromDN}>
 
-                                        <Image source={ic_user} style={styles.ImageStyle} />
+                                    <Image source={ic_user} style={styles.ImageStyle} />
 
-                                        <TextInput
-                                            onChangeText={(name) => this.setState({ name })}
-                                            value={this.state.name}
-                                            placeholderTextColor='#fff'
-                                            placeholder='Họ và tên'
-                                            underlineColorAndroid='transparent'
-                                            style={styles.style_TextInput} />
+                                    <TextInput
+                                        onChangeText={(name) => this.setState({ name })}
+                                        value={this.state.name}
+                                        placeholderTextColor='#fff'
+                                        placeholder='Họ và tên'
+                                        underlineColorAndroid='transparent'
+                                        style={styles.style_TextInput} />
 
-                                    </View>
+                                </View>
 
                                     <View style={styles.fromDN}>
 
@@ -381,8 +381,8 @@ const styles = StyleSheet.create({
     ImageStyle: {
         padding: 10,
         margin: 10,
-        height: 25,
-        width: 25,
+        height: 10,
+        width: 10,
         resizeMode : 'stretch',
         alignItems: 'center'
     },

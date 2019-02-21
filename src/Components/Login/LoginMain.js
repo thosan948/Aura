@@ -14,6 +14,8 @@ import ic_Background from '../../Media/Background/BackgroundLogin.png';
 import ic_welcome from '../../Media/Background/welcome.png';
 import ic_logo from '../../Media/Logo/logo.png'
 
+import OpenSettings from 'react-native-open-settings';
+
 var deviceWidth = Dimensions.get("window").width;
 var deviceHeight = Dimensions.get("window").height;
 
@@ -60,10 +62,11 @@ export default class LoginMain extends Component {
 
     }
 
-    gotoLogin(){
+    gotoLogin() {
 
         const { navigation } = this.props;
         navigation.push( 'Login' );
+        // OpenSettings.openSettings()
 
     };
 

@@ -7,6 +7,7 @@ import {
     Image,
     Dimensions,
     BackHandler,
+    NetInfo,
     FlatList,
     View } from "react-native";
 
@@ -15,6 +16,11 @@ import ic_setting from '../../../Media/Icon/setting.png';
 
 // Import Dependencies
 import LinearGradient from 'react-native-linear-gradient';
+import {
+    SCLAlert,
+    SCLAlertButton,
+} from 'react-native-scl-alert';
+import OpenSettings from 'react-native-open-settings';
 
 // Import Components
 import Header from '../Header/Header';
@@ -32,6 +38,9 @@ export default class Status extends Component {
             emdn: '',
             checked: false,
             dataSource: [],
+            show_false: false,
+            fail: '',
+            check_erro: '',
 
         };
 
@@ -41,33 +50,51 @@ export default class Status extends Component {
 
         BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
 
-        fetch("http://library.limcom.vn/API/getNewAuto.php", {
+        NetInfo.getConnectionInfo().then((connectionInfo) => {
+            // console.log(
+            //   'Initial, type: ' +
+            //     connectionInfo.type +
+            //     ', effectiveType: ' +
+            //     connectionInfo.effectiveType,
+            // );
+            if(connectionInfo.type == "none"){
 
-            method: "POST",
-
-            headers: {
-                "Accept": "application/json",
-                "Content-Type": "application/json",
-            },
-
-        })
-
-        .then((response) => response.json())
-
-        .then(
-            (responseJson) => {
-
-                dataSourceAPI = responseJson;
-                this.setState({
-                    dataSource: dataSourceAPI,
+                this.setState({ 
+                    show_false: true, 
+                    fail: 'Lỗi kết nối',
+                    check_erro: 'Bạn hãy kiểm tra lại kết nối Internet hoặc Wifi',
                 });
 
-            },
+            }else{
 
-        )
-        .catch((error) => { console.log(error) });
-    
+                fetch("http://library.limcom.vn/API/getNewAuto.php", {
+
+                    method: "POST",
         
+                    headers: {
+                        "Accept": "application/json",
+                        "Content-Type": "application/json",
+                    },
+        
+                })
+        
+                .then((response) => response.json())
+        
+                .then(
+                    (responseJson) => {
+        
+                        dataSourceAPI = responseJson;
+                        this.setState({
+                            dataSource: dataSourceAPI,
+                        });
+        
+                    },
+        
+                )
+                .catch((error) => { console.log(error) });
+            }
+
+        });
 
     }
 
@@ -79,11 +106,28 @@ export default class Status extends Component {
 
     handleBackPress = () => {
 
-        const { navigator } = this.props;
-        navigator.pop();
+        const { navigation } = this.props;
+        navigation.pop();
         return true;
 
     }
+
+    handleClose = () => {
+
+        this.setState({ 
+            show_false: false 
+        });
+
+    };
+
+    handleOK = () => {
+
+        this.setState({ 
+            show_false: false 
+        });
+        OpenSettings.openSettings();
+
+    };
 
     goBack(){
         const { navigation } = this.props;
@@ -278,6 +322,17 @@ export default class Status extends Component {
                         </View>
 
                     </View>
+
+                    <SCLAlert
+                        show={this.state.show_false}
+                        onRequestClose={this.handleClose}
+                        theme="info"
+                        title={this.state.fail}
+                        subtitle={this.state.check_erro}>
+
+                        <SCLAlertButton theme="info" onPress={this.handleOK}>OK</SCLAlertButton>
+
+                    </SCLAlert>
 
                 </LinearGradient>
 
