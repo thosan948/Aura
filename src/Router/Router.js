@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {View, Text, BackHandler,NetInfo } from 'react-native';
+import {View, Text, BackHandler,NetInfo, StatusBar } from 'react-native';
 import MainNavigator from './AppNavigation';
 
 // Import Dependencies
@@ -23,6 +23,8 @@ export default class Router extends Component {
     };
 
     componentDidMount() {
+        StatusBar.setBarStyle( 'light-content',true)
+        StatusBar.setBackgroundColor("#b99b64")
         BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
         this._CheckConnect();
 

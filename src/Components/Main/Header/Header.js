@@ -3,6 +3,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
+    AsyncStorage,
     Dimensions,
     View } from "react-native";
 
@@ -28,6 +29,25 @@ export default class Header extends Component {
         };
 
     }
+
+    componentDidMount(){
+        this._GetData();
+    }
+
+    _GetData = async () => {
+
+
+        try {
+            var get_image = await AsyncStorage.getItem("@Image:key");
+            this.setState({
+                get_image: get_image,
+            });
+
+        } catch (error) {
+            console.log(error);
+        }
+
+    };
 
     render() {
 
@@ -55,9 +75,9 @@ export default class Header extends Component {
 
                     <View style = {styles.view_menu}>
 
-                        <TouchableOpacity>
+                        <TouchableOpacity style = {{justifyContent: 'center'}}>
 
-                            <Image source = {ic_user} style = {styles.img_icon} />
+                        <Image source = {{uri: this.state.get_image}} style = {styles.img_user} />
 
                         </TouchableOpacity>
 
@@ -90,6 +110,12 @@ const styles = StyleSheet.create({
     img_icon: {
         height: 45,
         width: 45,
+        borderRadius: 30,
+    },
+    img_user: {
+        height: 40,
+        width: 40,
+        borderRadius: 30,
     },
     view_warp: {
         flexDirection: 'row',

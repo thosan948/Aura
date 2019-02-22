@@ -7,6 +7,8 @@ import {
     Image,
     Dimensions,
     BackHandler,
+    AsyncStorage,
+    ToastAndroid,
     NetInfo,
     FlatList,
     View } from "react-native";
@@ -59,7 +61,18 @@ export default class Status extends Component {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
 
     }
-    _LoadData(){
+    _LoadData = async () => {
+
+        try {
+            var get_id = await AsyncStorage.getItem("@Id:key");
+            this.setState({
+                get_id: get_id,
+            });
+        } catch (error) {
+            console.log(error);
+        }
+
+
 
         NetInfo.getConnectionInfo().then((connectionInfo) => {
             if(connectionInfo.type == "none"){
@@ -82,7 +95,7 @@ export default class Status extends Component {
                     },
         
                     body: JSON.stringify({
-                        "IDCUS": "1523"
+                        "IDCUS": this.state.get_id
                     })
         
                 })
@@ -92,11 +105,16 @@ export default class Status extends Component {
                 .then(
                     (responseJson) => {
         
-                        console.log(responseJson)
                         dataSourceAPI = responseJson;
-                        this.setState({
-                            dataSource: dataSourceAPI,
-                        });
+                        // console.log( dataSourceAPI + " aaaaaaaaa")
+                        if(dataSourceAPI != "EMPTY ORDER"){
+                            this.setState({
+                                dataSource: dataSourceAPI,
+                            });
+                        }else if (dataSourceAPI == "EMPTY ORDER"){
+                            ToastAndroid.showWithGravity("Không có dữ liệu", ToastAndroid.SHORT, ToastAndroid.BOTTOM);
+                        }
+
         
                     },
         
@@ -132,7 +150,13 @@ export default class Status extends Component {
             show_false: false 
         })
 
-    }
+    };
+
+    gotoChitiet(id_order){
+
+        this.props.navigation.push('ChitietHD', id_order);
+
+    };
 
     goBack(){
 
@@ -140,7 +164,7 @@ export default class Status extends Component {
         navigation.pop();
         return true;
 
-    }
+    };
 
     render() {
 
@@ -167,7 +191,7 @@ export default class Status extends Component {
         
                 <LinearGradient 
                     start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 1 }}
                     colors={['#b99b64', '#735934']}
                     style={styles.view_Main}>
 
@@ -244,13 +268,13 @@ export default class Status extends Component {
                                             </View>
 
                                             <FlatList
-                                                style = {{height: deviceHeight * 0.5}}
+                                                style = {{height: deviceHeight * 0.55}}
                                                 data={this.state.dataSource}
                                                 showsVerticalScrollIndicator={false}
                                                 keyExtractor={item => item.id}
                                                 renderItem={({item}) =>
 
-                                                    <TouchableOpacity onPress={() => this.props.gotoChitiet(id_order = item.orderid)}>
+                                                    <TouchableOpacity onPress={() => this.gotoChitiet(id_order = item.orderid)}>
 
                                                         <View style = {styles.view_main}>
 

@@ -167,7 +167,6 @@ export default class Main extends Component {
                 get_name: get_name,
                 get_code: get_code,
             });
-            console.log(get_img);
         } catch (error) {
             console.log(error);
         }
@@ -194,7 +193,10 @@ export default class Main extends Component {
 
                         <View>
 
-                            <View>
+
+                            <TouchableOpacity 
+                                onPress= {() => this.gotoSetting()}
+                                style = {{alignSelf: 'center', marginTop: deviceHeight * 0.075}}>
 
                                 <ImageBackground
                                     imageStyle={{
@@ -206,6 +208,7 @@ export default class Main extends Component {
                                     style={styles.imageProfile} >
 
                                 </ImageBackground>
+
 
                                 <Text 
                                     style = {{
@@ -228,7 +231,8 @@ export default class Main extends Component {
                                     }}>{this.state.get_code}
                                 </Text>
 
-                            </View>
+                            </TouchableOpacity>
+
 
                             <View>
 
@@ -391,8 +395,6 @@ const styles = StyleSheet.create({
         width: deviceWidth * 0.3,
         height: deviceWidth * 0.3,
         alignSelf: 'center',
-        marginTop: deviceHeight * 0.075
-
     },
 
     view_btn: {
@@ -409,8 +411,9 @@ const styles = StyleSheet.create({
         textAlign : 'center',
         fontFamily: "helveticaneue",
         fontSize: 16,
+        fontWeight: 'bold',
         color: '#fff',
-        textDecorationLine: 'underline'
+        // textDecorationLine: 'underline'
     },
 
     view_Click: {

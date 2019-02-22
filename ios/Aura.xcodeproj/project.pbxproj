@@ -71,6 +71,9 @@
 		CED2E7A921E542C7BB42BE9D /* libReact Native Open Settings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9B94253FC10949FBB667E3EA /* libReact Native Open Settings.a */; };
 		BCC74B934A5B4F30855B84B3 /* libRNOpenAppSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7047BB9329A444BBB6A790ED /* libRNOpenAppSettings.a */; };
 		835759D4499A49F196D3B81A /* libRNSettings.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 75DABDE71CFC4B38BC1B1D46 /* libRNSettings.a */; };
+		D4641FD7B2674BAAB4C6647A /* libRNImagePicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A2FC2D0D707C486D8B5C45C2 /* libRNImagePicker.a */; };
+		8B7CB9D786C241028C3BA0AF /* libRCTImageResizer.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BB2F53DC8DB46B6A2F3C094 /* libRCTImageResizer.a */; };
+		9FBF81BAF959402DB70D0522 /* libRNFetchBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = A281E11E3BAC4FE191B5D641 /* libRNFetchBlob.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -418,6 +421,12 @@
 		7047BB9329A444BBB6A790ED /* libRNOpenAppSettings.a */ = {isa = PBXFileReference; name = "libRNOpenAppSettings.a"; path = "libRNOpenAppSettings.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 		9CE7DF657EDF414DBE7AC040 /* RNSettings.xcodeproj */ = {isa = PBXFileReference; name = "RNSettings.xcodeproj"; path = "../node_modules/react-native-settings/ios/RNSettings.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
 		75DABDE71CFC4B38BC1B1D46 /* libRNSettings.a */ = {isa = PBXFileReference; name = "libRNSettings.a"; path = "libRNSettings.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		478B18C67D5B413595212A41 /* RNImagePicker.xcodeproj */ = {isa = PBXFileReference; name = "RNImagePicker.xcodeproj"; path = "../node_modules/react-native-image-picker/ios/RNImagePicker.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		A2FC2D0D707C486D8B5C45C2 /* libRNImagePicker.a */ = {isa = PBXFileReference; name = "libRNImagePicker.a"; path = "libRNImagePicker.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		65008BF0F9FA4583A47B8FC3 /* RCTImageResizer.xcodeproj */ = {isa = PBXFileReference; name = "RCTImageResizer.xcodeproj"; path = "../node_modules/react-native-image-resizer/ios/RCTImageResizer.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		2BB2F53DC8DB46B6A2F3C094 /* libRCTImageResizer.a */ = {isa = PBXFileReference; name = "libRCTImageResizer.a"; path = "libRCTImageResizer.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
+		6877F9409919486D91B688EB /* RNFetchBlob.xcodeproj */ = {isa = PBXFileReference; name = "RNFetchBlob.xcodeproj"; path = "../node_modules/rn-fetch-blob/ios/RNFetchBlob.xcodeproj"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = wrapper.pb-project; explicitFileType = undefined; includeInIndex = 0; };
+		A281E11E3BAC4FE191B5D641 /* libRNFetchBlob.a */ = {isa = PBXFileReference; name = "libRNFetchBlob.a"; path = "libRNFetchBlob.a"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = archive.ar; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -454,6 +463,9 @@
 				CED2E7A921E542C7BB42BE9D /* libReact Native Open Settings.a in Frameworks */,
 				BCC74B934A5B4F30855B84B3 /* libRNOpenAppSettings.a in Frameworks */,
 				835759D4499A49F196D3B81A /* libRNSettings.a in Frameworks */,
+				D4641FD7B2674BAAB4C6647A /* libRNImagePicker.a in Frameworks */,
+				8B7CB9D786C241028C3BA0AF /* libRCTImageResizer.a in Frameworks */,
+				9FBF81BAF959402DB70D0522 /* libRNFetchBlob.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -652,6 +664,9 @@
 				2CBFCDE83BF64E97AEA4CEA7 /* React Native Open Settings.xcodeproj */,
 				43CC4E83FEE94FA79B4522DC /* RNOpenAppSettings.xcodeproj */,
 				9CE7DF657EDF414DBE7AC040 /* RNSettings.xcodeproj */,
+				478B18C67D5B413595212A41 /* RNImagePicker.xcodeproj */,
+				65008BF0F9FA4583A47B8FC3 /* RCTImageResizer.xcodeproj */,
+				6877F9409919486D91B688EB /* RNFetchBlob.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1343,6 +1358,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1354,6 +1372,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-open-settings",
 					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
 					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-resizer\ios\RCTImageResizer",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 				);
 			};
 			name = Debug;
@@ -1384,6 +1405,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1395,6 +1419,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-open-settings",
 					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
 					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-resizer\ios\RCTImageResizer",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 				);
 			};
 			name = Release;
@@ -1425,6 +1452,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-open-settings",
 					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
 					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-resizer\ios\RCTImageResizer",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 				);
 			};
 			name = Debug;
@@ -1454,6 +1484,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-open-settings",
 					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
 					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-resizer\ios\RCTImageResizer",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 				);
 			};
 			name = Release;
@@ -1492,6 +1525,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1503,6 +1539,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-open-settings",
 					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
 					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-resizer\ios\RCTImageResizer",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 				);
 			};
 			name = Debug;
@@ -1541,6 +1580,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1552,6 +1594,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-open-settings",
 					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
 					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-resizer\ios\RCTImageResizer",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 				);
 			};
 			name = Release;
@@ -1589,6 +1634,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1600,6 +1648,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-open-settings",
 					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
 					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-resizer\ios\RCTImageResizer",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 				);
 			};
 			name = Debug;
@@ -1637,6 +1688,9 @@
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
+					"\"$(SRCROOT)/$(TARGET_NAME)\"",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1648,6 +1702,9 @@
 					"$(SRCROOT)\..\node_modules\react-native-open-settings",
 					"$(SRCROOT)\..\node_modules\react-native-app-settings\ios",
 					"$(SRCROOT)\..\node_modules\react-native-settings\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-picker\ios",
+					"$(SRCROOT)\..\node_modules\react-native-image-resizer\ios\RCTImageResizer",
+					"$(SRCROOT)\..\node_modules\rn-fetch-blob\ios/**",
 				);
 			};
 			name = Release;

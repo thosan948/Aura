@@ -160,18 +160,19 @@ const styles = StyleSheet.create({
     },
     text_DK: {
         textAlign: 'center',
-        // fontWeight: 'bold',
+        fontWeight: 'bold',
         color: "#fff",
         fontSize: 16,
         marginTop:  deviceHeight*0.01,
         fontFamily: "helveticaneue",
-        textDecorationLine: 'underline'
+        // textDecorationLine: 'underline'
     },
     text_DN:{
+        fontWeight: 'bold',
         textAlign : 'center',
         fontFamily: "helveticaneue",
         fontSize: 16,
-        textDecorationLine: 'underline'
+        // textDecorationLine: 'underline'
     }
 
 });

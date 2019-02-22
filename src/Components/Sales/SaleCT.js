@@ -130,7 +130,7 @@ export default class SaleCT extends Component {
 
                 <LinearGradient 
                     start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 1 }}
                     colors={['#b99b64', '#735934']}
                     style={styles.view_Linear}>
 

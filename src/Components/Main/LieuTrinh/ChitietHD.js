@@ -33,6 +33,7 @@ export default class Status extends Component {
             emdn: '',
             checked: false,
             dataSource: [],
+            get_id_order: id_order,
 
         };
 
@@ -52,7 +53,7 @@ export default class Status extends Component {
             },
 
             body: JSON.stringify({
-                "IDORDERS": this.props.get_id_order
+                "IDORDERS": this.state.get_id_order
             })
 
         })
@@ -85,15 +86,15 @@ export default class Status extends Component {
 
     handleBackPress = () => {
 
-        const { navigator } = this.props;
-        navigator.pop();
+        const { navigation } = this.props;
+        navigation.pop();
         return true;
 
     }
 
     goBack(){
-        const { navigator } = this.props;
-        navigator.pop();
+        const { navigation } = this.props;
+        navigation.pop();
         return true;
     }
 
@@ -106,7 +107,7 @@ export default class Status extends Component {
             
                 <LinearGradient 
                     start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
+                    end={{ x: 0, y: 1 }}
                     colors={['#b99b64', '#735934']}
                     style={styles.view_Main}>
 

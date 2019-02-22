@@ -491,12 +491,12 @@ const styles = StyleSheet.create({
 
     text_DK: {
         textAlign: 'center',
-        // fontWeight: 'bold',
         color: "#fff",
         fontSize: 16,
         marginTop:  deviceHeight*0.01,
+        fontWeight: 'bold',
         fontFamily: "helveticaneue",
-        textDecorationLine: 'underline'
+        // textDecorationLine: 'underline'
     },
 
     fromDN: {
@@ -541,16 +541,16 @@ const styles = StyleSheet.create({
     text_NTK:{
         fontFamily: "helveticaneue",
         color: '#fff',
-        marginTop: 12,
+        marginTop: 13,
         marginLeft: -7,
-        fontSize: 12,
+        fontSize: 13,
     },
     text_QMK:{
         fontFamily: "helveticaneue",
         color: '#fff',
-        marginTop: 12,
-        fontSize: 12,
-        textDecorationLine: 'underline'
+        marginTop: 13,
+        fontSize: 13,
+        // textDecorationLine: 'underline'
     },
     TextInput: {
         // flex:1,
@@ -568,9 +568,10 @@ const styles = StyleSheet.create({
 
     text_DN:{
         textAlign : 'center',
+        fontWeight: 'bold',
         fontFamily: "helveticaneue",
         fontSize: 16,
-        textDecorationLine: 'underline'
+        // textDecorationLine: 'underline'
     }
 
 });

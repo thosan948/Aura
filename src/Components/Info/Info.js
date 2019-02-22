@@ -17,9 +17,21 @@ import ic_back from '../../Media/Icon/back.png';
 import ic_setting from '../../Media/Icon/adc.png';
 import icCamera from '../../Media/Icon/camera.png';
 import ic_info from '../../Media/Background/fb.jpg';
+import ic_Save from '../../Media/Icon/icon_ok.png';
+import ic_Huy from '../../Media/Icon/icon_huy.png';
 
 // Import Dependencies
 import LinearGradient from 'react-native-linear-gradient';
+import ImagePicker from 'react-native-image-picker';
+import ImageResizer from 'react-native-image-resizer';
+import RNFetchBlob from 'rn-fetch-blob';
+
+const options = {
+    title: 'Chọn ảnh đại diện',
+    takePhotoButtonTitle: 'Chụp ảnh',
+    chooseFromLibraryButtonTitle: 'Chọn ảnh từ thư viện',
+    quality: 1
+};
 
 var deviceWidth = Dimensions.get("window").width;
 var deviceHeight = Dimensions.get("window").height;
@@ -32,7 +44,9 @@ export default  class Info extends Component {
         this.state = {
 
             emdn: '',
-            checked: false
+            checked: false,
+            imageSource: null,
+            data: null,
 
         };
 
@@ -65,9 +79,84 @@ export default  class Info extends Component {
         return true;
     };
 
+    selectPhoto() {
+        ImagePicker.showImagePicker(options, (res) => {
+            //console.log('Response = ', response);
+
+            if (res.didCancel) {
+                //console.log('User cancelled image picker');
+            } else if (res.error) {
+                //console.log('ImagePicker Error: ', response.error);
+            } else {
+                let source = { uri: res.uri };
+                ImageResizer.createResizedImage(res.uri, 1000, 1000, "JPEG", 100)
+                    .then(res => {
+                        RNFetchBlob.fs
+                            .readFile(res.path, "base64")
+                            .then(data => {
+                                this.setState({ uri: res.uri, data: data, check_save: 1, imageSource: source,});
+                            })
+                            .catch(err => {
+                                console.log(err);
+                            });
+                    })
+                    .catch(err => {
+                        console.log(err);
+                    });
+
+            }
+
+        });
+    };
+
+    HuySave() {
+        //this.upDateImage();
+        this.setState({
+            check_save: 0,
+            imageSource: { uri: this.state.get_img }
+        });
+
+    };
+
+    UploadImage() {
+
+        // RNFetchBlob.fetch('POST', 'http://library.limcom.vn/wsapply/uploadImg.php', {
+
+        //     Authorization: "Bearer access-token",
+        //     otherHeader: "foo",
+
+        //     'Content-Type': 'multipart/from-data',
+        //     'Transfer-Encoding': 'Chunked'
+
+        // }, [
+        //         { name: 'image', filename: this.state.get_id, type: 'image/png', data: this.state.data }
+        //     ])
+
+        //     .then((resp) => resp.json())
+
+        //     .then((responseJson) => {
+        //         check = responseJson.kode;
+        //         this.setState({ get_img: "http://library.limcom.vn/wsapply/dist/image/" + check });
+        //         console.log(check);
+        //         console.log(get_img);
+        //         this.SaveData();
+        //     })
+
+        //     .catch((err) => {
+        //         console.log(err)
+        //     });
+
+        this.setState({
+
+            check_save: 0
+
+        });
+
+    }
+
     refresh = async () => {
         this.GetData();
-    }
+    };
 
     gotoCustom(){
         this.props.navigation.push('Custom', {
@@ -75,7 +164,7 @@ export default  class Info extends Component {
             onGoBack: () => this.refresh(),
           });
 
-    }
+    };
 
     GetData = async () => {
 
@@ -90,6 +179,7 @@ export default  class Info extends Component {
             var get_tinh = await AsyncStorage.getItem("@Tinh:key");
             var get_quan = await AsyncStorage.getItem("@Quan:key");
             var get_diachi = await AsyncStorage.getItem("@Diachi:key");
+            var get_image = await AsyncStorage.getItem("@Image:key");
 
             this.setState({
                 _name: get_name,
@@ -100,6 +190,7 @@ export default  class Info extends Component {
                 _tinh: get_tinh,
                 _quan: get_quan,
                 _diachi: get_diachi,
+                _image: get_image,
             });
             if(get_gioitinh == '1'){
 
@@ -128,6 +219,94 @@ export default  class Info extends Component {
 
 
     render() {
+
+        const Save =
+        (
+            <View>
+
+                <View style={{
+                    flexDirection: 'row',
+                    alignSelf: 'center',
+                    width: deviceWidth * 0.6,
+                }}>
+
+                    <View
+                        style={{
+                            alignSelf: 'center',
+                            // height: deviceWidth * 0.1,
+                            marginTop: deviceWidth * 0.05,
+                            width: deviceWidth * 0.3,
+                        }}>
+
+                        <TouchableOpacity
+                            onPress={this.UploadImage.bind(this)}>
+
+                            <Image source={ic_Save} style={{
+                                alignSelf: 'center',
+                                borderRadius: 180,
+                                borderWidth: 2,
+                                borderColor: '#b99b64',
+                                height: deviceWidth * 0.1,
+                                width: deviceWidth * 0.1,
+                            }} />
+
+                            <Text style={{
+                                textAlign: 'center',
+                                color: '#16cc02',
+                                fontSize: 16,
+                                fontWeight: 'bold',
+                            }}>Lưu</Text>
+
+                        </TouchableOpacity>
+
+                    </View>
+
+                    <View
+                        style={{
+                            alignSelf: 'center',
+                            // height: deviceWidth * 0.1,
+                            marginTop: deviceWidth * 0.05,
+                            width: deviceWidth * 0.3,
+                        }}>
+
+                        <TouchableOpacity
+                            onPress={this.HuySave.bind(this)}>
+
+                            <Image source={ic_Huy} style={{
+                                alignSelf: 'center',
+                                borderRadius: 180,
+                                borderWidth: 2,
+                                borderColor: '#b99b64',
+                                height: deviceWidth * 0.1,
+                                width: deviceWidth * 0.1,
+                            }} />
+
+                            <Text style={{
+                                textAlign: 'center',
+                                color: '#af0202',
+                                fontSize: 16,
+                                fontWeight: 'bold',
+                            }}>Hủy</Text>
+
+                        </TouchableOpacity>
+
+                    </View>
+
+                </View>
+
+            </View>
+
+        );
+
+        let ComponentSave;
+
+        if (this.state.check_save == 0) {
+            ComponentSave = <View></View>
+        } else if (this.state.check_save == 1){
+            ComponentSave = Save
+        }else{
+                ComponentSave = <View></View>
+        }
 
         return (
             
@@ -169,12 +348,12 @@ export default  class Info extends Component {
                                             borderWidth: 2,
                                             borderColor: '#fff'
                                         }}
-                                        source={ic_info}
+                                        source={this.state.imageSource != null ? this.state.imageSource : { uri: this.state._image }}
                                         style={styles.imageProfile} >
 
                                         <TouchableOpacity
                                             style={styles.touchable}
-                                            // onPress={this.selectPhoto.bind(this)}
+                                            onPress={this.selectPhoto.bind(this)}
                                             >
 
                                             <Image source={icCamera} style={styles.ic_camera} />
@@ -184,6 +363,7 @@ export default  class Info extends Component {
                                     </ImageBackground>
 
                                 </View>
+                                {ComponentSave}
 
                             <View>
                                 <Text style = {[styles.style_txt, {marginTop: deviceHeight * 0.025, fontWeight: 'bold'}]}>{this.state._name}</Text>
@@ -220,10 +400,10 @@ export default  class Info extends Component {
                                 <LinearGradient 
                                     start={{ x: 0, y: 0 }}
                                     end={{ x: 1, y: 1 }}
-                                    colors={['#b99b64', '#735934']}
+                                    colors={['#6e5532', '#6e5532']}
                                     style = { styles.container }>
 
-                                    <Text style = {{textDecorationLine: 'underline', fontSize: 14, color: '#fff', textAlign: 'center'}}>Đăng Xuất</Text>
+                                    <Text style = {{fontWeight: 'bold', fontSize: 16, color: '#fff', textAlign: 'center'}}>ĐĂNG XUẤT</Text>
 
                                 </LinearGradient>
                             </TouchableOpacity>
