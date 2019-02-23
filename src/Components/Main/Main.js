@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-// Commit thành công cmnr anh em ơi
+// Commit thành công
 
 import { 
     StyleSheet,
