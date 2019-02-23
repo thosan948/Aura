@@ -175,9 +175,10 @@ export default class Login extends Component {
 
         NetInfo.getConnectionInfo().then((connectionInfo) => {
             if(connectionInfo.type == "none"){
+                // console.log(connectionInfo.type)
                 this.setState({ 
                     checkWifi: true,
-                    show_check: true, 
+                    show_false: true, 
                     fail: 'Lỗi kết nối',
                     check_erro: 'Bạn hãy kiểm tra lại kết nối Internet hoặc Wifi',
                 });

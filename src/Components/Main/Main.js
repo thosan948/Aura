@@ -149,6 +149,9 @@ export default class Main extends Component {
     gotoLieutrinh(){
         this.props.navigation.push('LieuTrinh');
     };
+    gotoShopping(){
+        this.props.navigation.push('Shopping');
+    };
     gotoStatus(){
         this.props.navigation.push('Status');
     };
@@ -316,7 +319,7 @@ export default class Main extends Component {
 
                                     </TouchableOpacity>
 
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress = {() => this.gotoShopping() }>
 
                                         <ImageBackground                     
                                             source={ic_Click}

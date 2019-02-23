@@ -16,6 +16,7 @@ import Custom from '../Components/Info/Custom';
 import Fogot from '../Components/FogotPass/FogotPass';
 import Sales from '../Components/Sales/Sales';
 import SaleCT from '../Components/Sales/SaleCT';
+import Shopping from '../Components/Main/Shopping/Shopping'
 
 const MainNavigator = createStackNavigator({
 
@@ -33,6 +34,12 @@ const MainNavigator = createStackNavigator({
 	},
 	SaleCT: {
 		screen: SaleCT ,
+		navigationOptions: {
+			header: null ,
+		}
+	},
+	Shopping: {
+		screen: Shopping ,
 		navigationOptions: {
 			header: null ,
 		}
