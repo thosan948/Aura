@@ -112,7 +112,6 @@ Check(){
 const vaa00 = StyleSheet.create({
 	box: {
 		flex: 1,
-		backgroundColor: '#ff9700',
 		justifyContent: 'center',
 		alignItems: 'center',
 	},

@@ -94,6 +94,7 @@ export default  class Info extends Component {
                         RNFetchBlob.fs
                             .readFile(res.path, "base64")
                             .then(data => {
+                                console.log(data + " aaaaaaa");
                                 this.setState({ uri: res.uri, data: data, check_save: 1, imageSource: source,});
                             })
                             .catch(err => {
@@ -120,31 +121,35 @@ export default  class Info extends Component {
 
     UploadImage() {
 
-        // RNFetchBlob.fetch('POST', 'http://library.limcom.vn/wsapply/uploadImg.php', {
+        fetch("http://library.limcom.vn/API/updateAvatar.php", {
+        
+            method: "POST",
 
-        //     Authorization: "Bearer access-token",
-        //     otherHeader: "foo",
+            headers: {
+                "Accept": "application/json",
+                "Content-Type": "application/json",
+            },
 
-        //     'Content-Type': 'multipart/from-data',
-        //     'Transfer-Encoding': 'Chunked'
+            body: JSON.stringify({
+                "ID": this.state._id,		// POST biến MAIL
+                "AVATAR": "data:image/jpeg;base64, " + this.state.data
+            })
 
-        // }, [
-        //         { name: 'image', filename: this.state.get_id, type: 'image/png', data: this.state.data }
-        //     ])
+        })
 
-        //     .then((resp) => resp.json())
+        .then((response) => response.json())
 
-        //     .then((responseJson) => {
-        //         check = responseJson.kode;
-        //         this.setState({ get_img: "http://library.limcom.vn/wsapply/dist/image/" + check });
-        //         console.log(check);
-        //         console.log(get_img);
-        //         this.SaveData();
-        //     })
+        .then((responseJson) => {
+            check = responseJson.Result;
+            this.setState({ get_img: "http://library.limcom.vn/wsapply/dist/image/" + check });
+            console.log(check);
+            // console.log(get_img);
+            // this.SaveData();
+        })
 
-        //     .catch((err) => {
-        //         console.log(err)
-        //     });
+        .catch((err) => {
+            console.log(err)
+        });
 
         this.setState({
 
@@ -171,6 +176,7 @@ export default  class Info extends Component {
 
         try {
             var get_name = await AsyncStorage.getItem("@Cusname:key");
+            var get_id = await AsyncStorage.getItem("@ID:key");
             var get_code = await AsyncStorage.getItem("@Cuscode:key");
             var get_cmnd = await AsyncStorage.getItem("@Cmnd:key");
             var get_phone = await AsyncStorage.getItem("@Cusphone:key");
@@ -191,6 +197,7 @@ export default  class Info extends Component {
                 _quan: get_quan,
                 _diachi: get_diachi,
                 _image: get_image,
+                _id: get_id,
             });
             if(get_gioitinh == '1'){
 
