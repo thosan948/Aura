@@ -9,6 +9,7 @@ import {
     Image,
     Dimensions,
     AsyncStorage,
+    Linking,
     ToastAndroid,
     BackHandler,
     View,
@@ -137,7 +138,7 @@ export default class Login extends Component {
             await AsyncStorage.setItem("@Tinh:key", this.state.tinh);
             await AsyncStorage.setItem("@Quan:key", this.state.quan);
             await AsyncStorage.setItem("@Diachi:key", this.state.diachi);
-            await AsyncStorage.setItem("@Image:key", this.state.image);
+            await AsyncStorage.setItem("@Image:key", "http://library.limcom.vn/API/dist/images/users/" + this.state.image);
 
             console.log(this.state.id);
 
@@ -159,7 +160,8 @@ export default class Login extends Component {
             show_false: false,
             checkWifi: false,
         });
-        OpenSettings.openSettings();
+        // OpenSettings.openSettings();
+        Linking.openURL("App-Prefs:root=WIFI");
         
     }
 
@@ -346,7 +348,7 @@ export default class Login extends Component {
                     source={ic_Background}
                     style={styles.view_bg_Main}>
                     
-                    <ScrollView>
+                    <ScrollView contentContainerStyle={{flexGrow: 1}}>
 
                         <View style = {styles.view_Main}>
 

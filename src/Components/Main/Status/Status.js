@@ -188,7 +188,7 @@ export default class Status extends Component {
                                             <FlatList
                                                 data={this.state.dataSource}
                                                 showsVerticalScrollIndicator={false}
-                                                keyExtractor={item => item.date }
+                                                keyExtractor={item => item.image }
                                                 renderItem={({ item }) => {
 
                                                     const item_child = (

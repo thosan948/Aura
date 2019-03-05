@@ -12,9 +12,13 @@ class StyleMain {
         },
     
         imageProfile: {
+            borderRadius: 180,
+            borderWidth: 2,
+            borderColor: '#fff',
             width: deviceWidth * 0.3,
             height: deviceWidth * 0.3,
             alignSelf: 'center',
+            overflow: "hidden",
         },
     
         view_btn: {

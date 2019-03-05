@@ -26,8 +26,8 @@ export default class Intro extends Component {
 
 	componentDidMount(){
 		this._GetData();
-		StatusBar.setBarStyle( 'light-content',true)
-		StatusBar.setBackgroundColor("#735934")
+		// StatusBar.setBarStyle( 'light-content',true)
+		// StatusBar.setBackgroundColor("#735934")
 	}
 
 	_GetData = async () => {

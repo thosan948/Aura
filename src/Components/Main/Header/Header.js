@@ -3,6 +3,7 @@ import {
     StyleSheet,
     TouchableOpacity,
     Image,
+    ImageBackground,
     AsyncStorage,
     Dimensions,
     View } from "react-native";
@@ -53,7 +54,7 @@ export default class Header extends Component {
 
         return (
             
-            <View style = {{ height: 46,}}>
+            <View style = {{ height: 46, marginTop: 10}}>
 
                 <View style = {styles.view_warp}>
 
@@ -77,7 +78,7 @@ export default class Header extends Component {
 
                         <TouchableOpacity style = {{justifyContent: 'center'}}>
 
-                        <Image source = {{uri: this.state.get_image}} style = {styles.img_user} />
+                        <ImageBackground source = {{uri: this.state.get_image}} style = {styles.img_user} />
 
                         </TouchableOpacity>
 
@@ -115,7 +116,8 @@ const styles = StyleSheet.create({
     img_user: {
         height: 40,
         width: 40,
-        borderRadius: 30,
+        borderRadius: 180,
+        overflow: "hidden",
     },
     view_warp: {
         flexDirection: 'row',

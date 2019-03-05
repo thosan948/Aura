@@ -159,10 +159,18 @@ export default class Main extends Component {
         this.props.navigation.push('Status');
     };
     gotoSetting(){
-        this.props.navigation.push('Info');
+        this.props.navigation.push('Info',{
+            onGetData: () => this.refresh(),
+        });
     };
 
+    refresh = async () => {
+
+        this._GetData();
+
+    };
     _GetData = async () => {
+
 
         try {
             var get_img = await AsyncStorage.getItem("@Image:key");
@@ -173,6 +181,7 @@ export default class Main extends Component {
                 get_name: get_name,
                 get_code: get_code,
             });
+        console.warn('Kaiser:  ' + this.state.get_img);
         } catch (error) {
             console.log(error);
         }
@@ -197,19 +206,14 @@ export default class Main extends Component {
                             margin: 10,
                             borderRadius: 30}}>
 
-                        <View>
+                        <View style = {{justifyContent: 'center', flex: 1}}>
 
 
                             <TouchableOpacity 
                                 onPress= {() => this.gotoSetting()}
-                                style = {{alignSelf: 'center', marginTop: deviceHeight * 0.075}}>
+                                style = {{alignSelf: 'center'}}>
 
                                 <ImageBackground
-                                    imageStyle={{
-                                        borderRadius: 180,
-                                        borderWidth: 2,
-                                        borderColor: '#fff'
-                                    }}
                                     source={this.state.get_img != "" ? { uri: this.state.get_img } : ic_Logo}
                                     style={styles.imageProfile} >
 

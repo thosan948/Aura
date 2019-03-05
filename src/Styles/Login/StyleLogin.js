@@ -14,7 +14,6 @@ class StyleLogin{
 
         view_Main:{
             flex: 1,
-            marginTop: deviceHeight * 0.125 ,
             alignSelf: 'center',
             justifyContent: 'center'
         },

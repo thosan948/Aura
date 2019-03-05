@@ -4,11 +4,14 @@ import {
     Text,
     StyleSheet,
     TouchableOpacity,
+    Animated,
     ImageBackground,
     BackHandler,
     AsyncStorage,
+    Button,
     TextInput,
     Dimensions,
+    TouchableWithoutFeedback,
     ScrollView,
     Picker,
     Image,
@@ -27,6 +30,7 @@ import ic_quan from '../../Media/Icon/ic_quan.png';
 import ic_home from '../../Media/Icon/ic_home.png';
 
 // Import Dependencies
+import IOSPicker from 'react-native-ios-picker';
 import CheckBox from 'react-native-check-box';
 import { RadioButton } from 'react-native-paper';
 import DatePicker from 'react-native-datepicker';
@@ -41,6 +45,7 @@ import Info from '../Info/Info';
 // Get Width , Height
 var deviceWidth = Dimensions.get("window").width;
 var deviceHeight = Dimensions.get("window").height;
+const { width: WindowWidth } = Dimensions.get('window');
 
 var txtNganhNghe = 0; txtQuanhuyen = 0;
 var d = new Date();
@@ -2998,6 +3003,9 @@ export default class Custom extends Component {
             show_true: false,
             check_erro: '',
             fail: '',
+            language: 'js',
+            modalIsVisible: false,
+            modalAnimatedValue: new Animated.Value(0),
         };
 
     };
@@ -3016,6 +3024,49 @@ export default class Custom extends Component {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
 
     };
+
+    _showPickerProvincial = () => {
+
+        this.setState({check_county : 'tinhthanh'});
+        this._handlePressOpen();
+
+    };
+
+    _showPickerCounty = () => {
+
+        this.setState({check_county : 'quanhuyen'});
+        this._handlePressOpen();
+
+    };
+
+    _handlePressDone = () => {
+
+        this.Check();
+        
+        Animated.timing(this.state.modalAnimatedValue, {
+          toValue: 0,
+          duration: 150,
+          useNativeDriver: true,
+        }).start(() => {
+          this.setState({ modalIsVisible: false });
+        });
+      };
+    
+    _handlePressOpen = () => {
+        if (this.state.modalIsVisible) {
+          return;
+        }
+    
+        this.setState({ modalIsVisible: true }, () => {
+          Animated.timing(this.state.modalAnimatedValue, {
+            toValue: 1,
+            duration: 200,
+            useNativeDriver: true,
+          }).start();
+        });
+      };
+    
+     
 
     GetData = async () => {
 
@@ -3044,6 +3095,7 @@ export default class Custom extends Component {
                 phone: get_phone,
                 date: get_birthdate,
                 tinhthanh: get_tinh,
+                history_tinhthanh: get_tinh,
                 quanhuyen: get_quan,
                 home: get_diachi,
                 checked: get_gioitinh,
@@ -3082,8 +3134,8 @@ export default class Custom extends Component {
     }
 
     handleBackPress = () => {
-        const { navigator } = this.props;
-        navigator.pop();
+        const { navigation } = this.props;
+        navigation.pop();
         return true;
 
     };
@@ -3107,8 +3159,7 @@ export default class Custom extends Component {
     }
 
     goBack(){
-        this.setState({kaiser : 'a'});
-        // const { navigation } = this.props;
+        const { navigation } = this.props;
         this.props.navigation.pop()
         return true;
     }
@@ -3117,21 +3168,22 @@ export default class Custom extends Component {
 
         this.setState({ tinhthanh: tinhthanh });
         txtTinhThanh = tinhthanh;
-        this.Check();
+        if(this.state.history_tinhthanh != tinhthanh){
+            this.setState({quanhuyen: '0'});
+        }
     };
 
     updateQuanhuyen = (quanhuyen) => {
 
         this.setState({ quanhuyen: quanhuyen });
         txtQuanhuyen = quanhuyen;
-        this.Check();
     };
 
     Check = () => {
 
         if (txtTinhThanh == 0) {
 
-            this.setState({ options: [] });
+            this.setState({ options: [],});
 
         } else if (txtTinhThanh != 0 && txtQuanhuyen == 0) {
 
@@ -3163,8 +3215,8 @@ export default class Custom extends Component {
             check_cmnd == "" ||
             check_birthdate == "" ||
             check_gioitinh == "" ||
-            check_tinh == "" ||
-            check_quanhuyen == "" ||
+            check_tinh == "0" ||
+            check_quanhuyen == "0" ||
             check_diachi == "" ) 
             {
 			this.setState({
@@ -3267,9 +3319,9 @@ export default class Custom extends Component {
                 
                 <ImageBackground source = {ic_bg} style = {styles.image_bg}>
 
-                    <ScrollView>
+                    <ScrollView contentContainerStyle={{flexGrow: 1}}>
 
-                        <View>
+                        <View style = {{flex: 1, justifyContent: 'center'}}>
 
                             <Image source = {ic_logo} style = {styles.image_logo}/>
 
@@ -3370,97 +3422,24 @@ export default class Custom extends Component {
                                     />
                                 </View>
 
-                                <View style={styles.fromDN}>
+                                
+                                <TouchableOpacity style={styles.fromDN} onPress={this._showPickerProvincial}>
 
                                     <Image source={ic_maps} style={styles.ImageStyle} />
+                                    <View style = {styles.ViewPicker}>
+                                        <Text style = {{fontSize: 15, color: '#fff'}}>{this.state.tinhthanh == '0' ? "Tỉnh - Thành Phố" : this.state.tinhthanh}</Text>
+                                    </View>
+                                </TouchableOpacity>
 
-                                    <Picker
-                                        style={styles.ViewPicker}
-                                        // mode="dropdown"
-                                        selectedValue={this.state.tinhthanh}
-                                        textStyle={{fontSize: 12,color:'yellow'}}
-                                        onValueChange={this.updateUser}>
-                                        <Picker.Item label="Tỉnh - Thành Phố" value='0' />
-                                        <Picker.Item label="TP. Hồ Chí Minh" value="TP. Hồ Chí Minh" />
-                                        <Picker.Item label="Hà Nội" value="Hà Nội" />
-                                        <Picker.Item label="Hải Phòng" value="Hải Phòng" />
-                                        <Picker.Item label="Đà Nẵng" value="Đà Nẵng" />
-                                        <Picker.Item label="Cần Thơ" value="Cần Thơ" />
-                                        <Picker.Item label="An Giang" value="An Giang" />
-                                        <Picker.Item label="Bà Rịa - Vũng Tàu" value="Bà Rịa - Vũng Tàu" />
-                                        <Picker.Item label="Bắc Giang" value="Bắc Giang" />
-                                        <Picker.Item label="Bắc Kạn" value="Bắc Kạn" />
-                                        <Picker.Item label="Bạc Liêu" value="Bạc Liêu" />
-                                        <Picker.Item label="Bắc Ninh" value="Bắc Ninh" />
-                                        <Picker.Item label="Bến Tre" value="Bến Tre" />
-                                        <Picker.Item label="Bình Định" value="Bình Định" />
-                                        <Picker.Item label="Bình Dương" value="Bình Dương" />
-                                        <Picker.Item label="Bình Phước" value="Bình Phước" />
-                                        <Picker.Item label="Bình Thuận" value="Bình Thuận" />
-                                        <Picker.Item label="Cà Mau" value="Cà Mau" />
-                                        <Picker.Item label="Cao Bằng" value="Cao Bằng" />
-                                        <Picker.Item label="Đắk Lắk" value="Đắk Lắk" />
-                                        <Picker.Item label="Đắk Nông" value="Đắk Nông" />
-                                        <Picker.Item label="Điện Biên" value="Điện Biên" />
-                                        <Picker.Item label="Đồng Nai" value="Đồng Nai" />
-                                        <Picker.Item label="Đồng Tháp" value="Đồng Tháp" />
-                                        <Picker.Item label="Gia Lai" value="Gia Lai" />
-                                        <Picker.Item label="Hà Giang" value="Hà Giang" />
-                                        <Picker.Item label="Hà Nam" value="Hà Nam" />
-                                        <Picker.Item label="Hà Tĩnh" value="Hà Tĩnh" />
-                                        <Picker.Item label="Hải Dương" value="Hải Dương" />
-                                        <Picker.Item label="Hậu Giang" value="Hậu Giang" />
-                                        <Picker.Item label="Hòa Bình" value="Hòa Bình" />
-                                        <Picker.Item label="Hưng Yên" value="Hưng Yên" />
-                                        <Picker.Item label="Khánh Hòa" value="Khánh Hòa" />
-                                        <Picker.Item label="Kiên Giang" value="Kiên Giang" />
-                                        <Picker.Item label="Kon Tum" value="Kon Tum" />
-                                        <Picker.Item label="Lai Châu" value="Lai Châu" />
-                                        <Picker.Item label="Lâm Đồng" value="Lâm Đồng" />
-                                        <Picker.Item label="Lạng Sơn" value="Lạng Sơn" />
-                                        <Picker.Item label="Lào Cai" value="Lào Cai" />
-                                        <Picker.Item label="Long An" value="Long An" />
-                                        <Picker.Item label="Nam Định" value="Nam Định" />
-                                        <Picker.Item label="Nghệ An" value="Nghệ An" />
-                                        <Picker.Item label="Ninh Bình" value="Ninh Bình" />
-                                        <Picker.Item label="Ninh Thuận" value="Ninh Thuận" />
-                                        <Picker.Item label="Phú Thọ" value="Phú Thọ" />
-                                        <Picker.Item label="Phú Yên" value="Phú Yên" />
-                                        <Picker.Item label="Quảng Bình" value="Quảng Bình" />
-                                        <Picker.Item label="Quảng Nam" value="Quảng Nam" />
-                                        <Picker.Item label="Quảng Ngãi" value="Quảng Ngãi" />
-                                        <Picker.Item label="Quảng Ninh" value="Quảng Ninh" />
-                                        <Picker.Item label="Quảng Trị" value="Quảng Trị" />
-                                        <Picker.Item label="Sóc Trăng" value="Sóc Trăng" />
-                                        <Picker.Item label="Sơn La" value="Sơn La" />
-                                        <Picker.Item label="Tây Ninh" value="Tây Ninh" />
-                                        <Picker.Item label="Thái Bình" value="Thái Bình" />
-                                        <Picker.Item label="Thái Nguyên" value="Thái Nguyên" />
-                                        <Picker.Item label="Thanh Hóa" value="Thanh Hóa" />
-                                        <Picker.Item label="Thừa Thiên - Huế" value="Thừa Thiên - Huế" />
-                                        <Picker.Item label="Tiền Giang" value="Tiền Giang" />
-                                        <Picker.Item label="Trà Vinh" value="Trà Vinh" />
-                                        <Picker.Item label="Tuyên Quang" value="Tuyên Quang" />
-                                        <Picker.Item label="Vĩnh Long" value="Vĩnh Long" />
-                                        <Picker.Item label="Vĩnh Phúc" value="Vĩnh Phúc" />
-                                        <Picker.Item label="Yên Bái" value="Yên Bái" />
-
-                                    </Picker>
-
-                                </View>
-
-                                <View style={styles.fromDN}>
+                                <TouchableOpacity style={styles.fromDN} onPress={this._showPickerCounty }>
 
                                     <Image source={ic_quan} style={styles.ImageStyle} />
-                                    <Picker
-                                        style={styles.ViewPicker}
-                                        selectedValue={this.state.quanhuyen}
-                                        onValueChange={this.updateQuanhuyen}>
-                                        <Picker.Item  label="Quận - Huyện..." value="0" />
-                                        {this.renderItem()}
-                                    </Picker>
+                                    
+                                    <View style = {styles.ViewPicker}>
+                                        <Text style = {{fontSize: 15, color: '#fff'}}>{this.state.quanhuyen == '0' ? "Quận - Huyện" : this.state.quanhuyen}</Text>
+                                    </View>
 
-                                </View>
+                                </TouchableOpacity>
 
                                 <View style={styles.fromDN}>
 
@@ -3567,6 +3546,7 @@ export default class Custom extends Component {
 
                             </SCLAlert>
                     </ScrollView>
+                    {this._maybeRenderModal()}
 
                 </ImageBackground>
 
@@ -3576,9 +3556,163 @@ export default class Custom extends Component {
 
     }
 
+     _maybeRenderModal = () => {
+        if (!this.state.modalIsVisible) {
+          return null;
+        }
+    
+        const { modalAnimatedValue } = this.state;
+        const opacity = modalAnimatedValue;
+        const translateY = modalAnimatedValue.interpolate({
+          inputRange: [0, 1],
+          outputRange: [300, 0],
+        });
+
+        const pickerTinhthanh = (
+            <Picker
+            style={{ width: WindowWidth, backgroundColor: '#fff' }}
+            // selectedValue={this.state.language}
+            selectedValue={this.state.tinhthanh}
+            onValueChange={this.updateUser}
+            // onValueChange={itemValue => this.setState({ language: itemValue })}
+            >
+                <Picker.Item label="Tỉnh - Thành Phố" value='0' />
+                <Picker.Item label="TP. Hồ Chí Minh" value="TP. Hồ Chí Minh" />
+                <Picker.Item label="Hà Nội" value="Hà Nội" />
+                <Picker.Item label="Hải Phòng" value="Hải Phòng" />
+                <Picker.Item label="Đà Nẵng" value="Đà Nẵng" />
+                <Picker.Item label="Cần Thơ" value="Cần Thơ" />
+                <Picker.Item label="An Giang" value="An Giang" />
+                <Picker.Item label="Bà Rịa - Vũng Tàu" value="Bà Rịa - Vũng Tàu" />
+                <Picker.Item label="Bắc Giang" value="Bắc Giang" />
+                <Picker.Item label="Bắc Kạn" value="Bắc Kạn" />
+                <Picker.Item label="Bạc Liêu" value="Bạc Liêu" />
+                <Picker.Item label="Bắc Ninh" value="Bắc Ninh" />
+                <Picker.Item label="Bến Tre" value="Bến Tre" />
+                <Picker.Item label="Bình Định" value="Bình Định" />
+                <Picker.Item label="Bình Dương" value="Bình Dương" />
+                <Picker.Item label="Bình Phước" value="Bình Phước" />
+                <Picker.Item label="Bình Thuận" value="Bình Thuận" />
+                <Picker.Item label="Cà Mau" value="Cà Mau" />
+                <Picker.Item label="Cao Bằng" value="Cao Bằng" />
+                <Picker.Item label="Đắk Lắk" value="Đắk Lắk" />
+                <Picker.Item label="Đắk Nông" value="Đắk Nông" />
+                <Picker.Item label="Điện Biên" value="Điện Biên" />
+                <Picker.Item label="Đồng Nai" value="Đồng Nai" />
+                <Picker.Item label="Đồng Tháp" value="Đồng Tháp" />
+                <Picker.Item label="Gia Lai" value="Gia Lai" />
+                <Picker.Item label="Hà Giang" value="Hà Giang" />
+                <Picker.Item label="Hà Nam" value="Hà Nam" />
+                <Picker.Item label="Hà Tĩnh" value="Hà Tĩnh" />
+                <Picker.Item label="Hải Dương" value="Hải Dương" />
+                <Picker.Item label="Hậu Giang" value="Hậu Giang" />
+                <Picker.Item label="Hòa Bình" value="Hòa Bình" />
+                <Picker.Item label="Hưng Yên" value="Hưng Yên" />
+                <Picker.Item label="Khánh Hòa" value="Khánh Hòa" />
+                <Picker.Item label="Kiên Giang" value="Kiên Giang" />
+                <Picker.Item label="Kon Tum" value="Kon Tum" />
+                <Picker.Item label="Lai Châu" value="Lai Châu" />
+                <Picker.Item label="Lâm Đồng" value="Lâm Đồng" />
+                <Picker.Item label="Lạng Sơn" value="Lạng Sơn" />
+                <Picker.Item label="Lào Cai" value="Lào Cai" />
+                <Picker.Item label="Long An" value="Long An" />
+                <Picker.Item label="Nam Định" value="Nam Định" />
+                <Picker.Item label="Nghệ An" value="Nghệ An" />
+                <Picker.Item label="Ninh Bình" value="Ninh Bình" />
+                <Picker.Item label="Ninh Thuận" value="Ninh Thuận" />
+                <Picker.Item label="Phú Thọ" value="Phú Thọ" />
+                <Picker.Item label="Phú Yên" value="Phú Yên" />
+                <Picker.Item label="Quảng Bình" value="Quảng Bình" />
+                <Picker.Item label="Quảng Nam" value="Quảng Nam" />
+                <Picker.Item label="Quảng Ngãi" value="Quảng Ngãi" />
+                <Picker.Item label="Quảng Ninh" value="Quảng Ninh" />
+                <Picker.Item label="Quảng Trị" value="Quảng Trị" />
+                <Picker.Item label="Sóc Trăng" value="Sóc Trăng" />
+                <Picker.Item label="Sơn La" value="Sơn La" />
+                <Picker.Item label="Tây Ninh" value="Tây Ninh" />
+                <Picker.Item label="Thái Bình" value="Thái Bình" />
+                <Picker.Item label="Thái Nguyên" value="Thái Nguyên" />
+                <Picker.Item label="Thanh Hóa" value="Thanh Hóa" />
+                <Picker.Item label="Thừa Thiên - Huế" value="Thừa Thiên - Huế" />
+                <Picker.Item label="Tiền Giang" value="Tiền Giang" />
+                <Picker.Item label="Trà Vinh" value="Trà Vinh" />
+                <Picker.Item label="Tuyên Quang" value="Tuyên Quang" />
+                <Picker.Item label="Vĩnh Long" value="Vĩnh Long" />
+                <Picker.Item label="Vĩnh Phúc" value="Vĩnh Phúc" />
+                <Picker.Item label="Yên Bái" value="Yên Bái" />
+          </Picker>
+        );
+
+        const pickerQuanhuyen = (
+            <Picker
+                style={{ width: WindowWidth, backgroundColor: '#fff' }}
+                selectedValue={this.state.quanhuyen}
+                onValueChange={this.updateQuanhuyen}>
+                <Picker.Item  label="Quận - Huyện..." value="0" />
+                {this.renderItem()}
+            </Picker>
+        );
+
+        let checkPicker;
+
+        if(this.state.check_county == 'tinhthanh'){
+
+            checkPicker = pickerTinhthanh;
+
+        }else if(this.state.check_county == 'quanhuyen'){
+
+            checkPicker = pickerQuanhuyen;
+
+        };
+    
+        return (
+          <View
+            style={StyleSheet.absoluteFill}
+            pointerEvents={this.state.modalIsVisible ? 'auto' : 'none'}>
+            <TouchableWithoutFeedback onPress={this._handlePressDone}>
+              <Animated.View style={[styles.overlay, { opacity }]} />
+            </TouchableWithoutFeedback>
+            <Animated.View
+              style={{
+                position: 'absolute',
+                bottom: 0,
+                left: 0,
+                transform: [{ translateY }],
+              }}>
+              <View style={styles.toolbar}>
+                <TouchableOpacity style={styles.toolbarRight} onPress={this._handlePressDone}>
+                  <Text style = {{fontWeight: 'bold', color: '#3366ff', fontSize: 16}}>OK</Text>
+                </TouchableOpacity>
+              </View>
+              {checkPicker}
+            </Animated.View>
+          </View>
+        );
+      };
+
 }
 
 const styles = StyleSheet.create({
+
+    container: {
+        flex: 1,
+        backgroundColor: '#fff',
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+      overlay: {
+        ...StyleSheet.absoluteFillObject,
+        backgroundColor: 'rgba(0,0,0,0.65)',
+      },
+      toolbar: {
+        backgroundColor: '#f1f1f1',
+        paddingVertical: 5,
+        paddingHorizontal: 15,
+      },
+      toolbarRight: {
+        alignSelf: 'flex-end',
+        padding: 5
+      },
 
     // Style Image
     image_logo: {
@@ -3648,6 +3782,7 @@ const styles = StyleSheet.create({
         width: deviceWidth * .7,
         flex:1,
         borderRadius: 30,
+        justifyContent: 'center',
         color: '#fff',
     },
 

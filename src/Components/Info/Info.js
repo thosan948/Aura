@@ -94,7 +94,7 @@ export default  class Info extends Component {
                         RNFetchBlob.fs
                             .readFile(res.path, "base64")
                             .then(data => {
-                                console.log(data + " aaaaaaa");
+                                // console.warn(data);
                                 this.setState({ uri: res.uri, data: data, check_save: 1, imageSource: source,});
                             })
                             .catch(err => {
@@ -140,11 +140,11 @@ export default  class Info extends Component {
         .then((response) => response.json())
 
         .then((responseJson) => {
-            check = responseJson.Result;
-            this.setState({ get_img: "http://library.limcom.vn/wsapply/dist/image/" + check });
-            console.log(check);
-            // console.log(get_img);
-            // this.SaveData();
+            check = responseJson.Result.avatar;
+            this.setState({ get_img: "http://library.limcom.vn/API/dist/images/users/" + check });
+            // console.warn(check);
+            console.warn(this.state.get_img);
+            this.SaveData();
         })
 
         .catch((err) => {
@@ -157,10 +157,28 @@ export default  class Info extends Component {
 
         });
 
-    }
+    };
+
+    SaveData = async () => {
+
+        try {
+
+            await AsyncStorage.setItem("@Image:key",this.state.get_img);
+
+        } catch(error){
+
+            console.log(error);
+
+        }
+
+        this.props.navigation.state.params.onGetData();
+
+    };
 
     refresh = async () => {
+
         this.GetData();
+
     };
 
     gotoCustom(){
@@ -176,7 +194,7 @@ export default  class Info extends Component {
 
         try {
             var get_name = await AsyncStorage.getItem("@Cusname:key");
-            var get_id = await AsyncStorage.getItem("@ID:key");
+            var get_id = await AsyncStorage.getItem("@Id:key");
             var get_code = await AsyncStorage.getItem("@Cuscode:key");
             var get_cmnd = await AsyncStorage.getItem("@Cmnd:key");
             var get_phone = await AsyncStorage.getItem("@Cusphone:key");
@@ -350,24 +368,18 @@ export default  class Info extends Component {
                                 }}>
 
                                     <ImageBackground
-                                        imageStyle={{
-                                            borderRadius: 180,
-                                            borderWidth: 2,
-                                            borderColor: '#fff'
-                                        }}
+                                        resizeMode='cover'
                                         source={this.state.imageSource != null ? this.state.imageSource : { uri: this.state._image }}
                                         style={styles.imageProfile} >
 
-                                        <TouchableOpacity
-                                            style={styles.touchable}
-                                            onPress={this.selectPhoto.bind(this)}
-                                            >
-
-                                            <Image source={icCamera} style={styles.ic_camera} />
-
-                                        </TouchableOpacity>
-
                                     </ImageBackground>
+                                    <TouchableOpacity
+                                        style={styles.touchable}
+                                        onPress={this.selectPhoto.bind(this)}>
+
+                                        <Image source={icCamera} style={styles.ic_camera} />
+
+                                    </TouchableOpacity>
 
                                 </View>
                                 {ComponentSave}
@@ -447,11 +459,12 @@ const styles = StyleSheet.create({
 
     ic_camera: {
         alignSelf: 'center',
-        borderRadius: 180,
+        borderRadius: 20,
         borderWidth: 2,
         borderColor: '#fff',
         height: deviceWidth * 0.1,
         width: deviceWidth * 0.1,
+        overflow: "hidden",
     },
 
     view_container: {
@@ -467,6 +480,10 @@ const styles = StyleSheet.create({
         width: deviceWidth * 0.40,
         height: deviceWidth * 0.40,
         alignSelf: 'center',
+        borderRadius: 180,
+        borderWidth: 2,
+        borderColor: '#fff',
+        overflow: "scroll",
     },
     view_Main: {
         justifyContent: 'center',
@@ -474,6 +491,7 @@ const styles = StyleSheet.create({
     },
     view_warp: {
         flexDirection: 'row',
+        marginTop: 10,
         justifyContent: 'space-between',
     },
     img_back: {
