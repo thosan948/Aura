@@ -74,6 +74,7 @@ export default  class Info extends Component {
     }
 
     goBack(){
+        this.props.navigation.state.params.onGetData();
         const { navigation } = this.props;
         navigation.pop();
         return true;
@@ -114,7 +115,7 @@ export default  class Info extends Component {
         //this.upDateImage();
         this.setState({
             check_save: 0,
-            imageSource: { uri: this.state.get_img }
+            imageSource: { uri: this.state._image }
         });
 
     };
@@ -178,6 +179,7 @@ export default  class Info extends Component {
     refresh = async () => {
 
         this.GetData();
+        console.warn("6969")
 
     };
 

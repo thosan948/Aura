@@ -22,6 +22,10 @@ import ic_setting from '../../Media/Icon/setting.png';
 // Import Dependencies
 import LinearGradient from 'react-native-linear-gradient';
 import NumberFormat from 'react-number-format';
+import {
+    SCLAlert,
+    SCLAlertButton,
+} from 'react-native-scl-alert';
 
 
 // Import Component
@@ -40,6 +44,7 @@ export default class SaleCT extends Component {
         this.state = {
             dataSource: [],
             cus: cus,
+            show_true: false,
             title: title,
         };
 
@@ -122,6 +127,14 @@ export default class SaleCT extends Component {
 
     };
 
+    handleClose = () => {
+
+        this.setState({ 
+            show_true: false,
+        })
+
+    }
+
     render(){
 
         return (
@@ -177,11 +190,11 @@ export default class SaleCT extends Component {
 
                                                     <View style = {{flexDirection: 'row', justifyContent: 'space-between',flex : 1}}>
 
-                                                        <TouchableOpacity style = {styles.view_Item}>
+                                                        <View style = {styles.view_Item}>
 
                                                             <Text style = {styles.txt_Item}>{item.brandname}</Text>
                                                         
-                                                        </TouchableOpacity>
+                                                        </View>
 
                                                         <View style = {{justifyContent: 'center', flex : 1, marginTop: -10}}>
 
@@ -218,7 +231,9 @@ export default class SaleCT extends Component {
 
                                                         <View style = {{justifyContent: 'center'}}>
 
-                                                            <TouchableOpacity style = {styles.view_Datlich}>
+                                                            <TouchableOpacity 
+                                                                onPress={() => this.setState({show_true: true})}
+                                                                style = {styles.view_Datlich}>
 
                                                                 <Text style = {styles.txt_Datlich}>Đặt lịch ngay</Text>
 
@@ -254,6 +269,18 @@ export default class SaleCT extends Component {
                         </View>
 
                     </View>
+
+                    <SCLAlert
+                        show={this.state.show_true}
+                        onRequestClose={this.handleClose}
+                        theme="info"
+                        title="Đặt lịch thành công"
+                        subtitle="Chúc mừng bạn đã đặt lịch thành công">
+
+                        <SCLAlertButton theme="info" onPress={this.handleClose}>OK</SCLAlertButton>
+                                
+
+                    </SCLAlert>
 
                 </LinearGradient>
 

@@ -3,7 +3,7 @@ import { WebView, Linking } from 'react-native';
 
 export default class WebViewThatOpensLinksInNavigator extends Component {
   render() {
-    const uri = this.props.get_link;
+    const uri = links;
     return (
       <WebView
         ref={(ref) => { this.webview = ref; }}

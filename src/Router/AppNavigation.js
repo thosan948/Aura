@@ -16,16 +16,24 @@ import Custom from '../Components/Info/Custom';
 import Fogot from '../Components/FogotPass/FogotPass';
 import Sales from '../Components/Sales/Sales';
 import SaleCT from '../Components/Sales/SaleCT';
-import Shopping from '../Components/Main/Shopping/Shopping'
+import Shopping from '../Components/Main/Shopping/Shopping';
+import Order from '../Components/Main/Order/Order';
 
 const MainNavigator = createStackNavigator({
-
+	
 	Intro: {
 		screen: Intro ,
 		navigationOptions: {
 			header: null ,
 		}
-  },
+	},
+	
+		Order: {
+		screen: Order ,
+		navigationOptions: {
+			header: null ,
+		}
+	},
 	Sales: {
 		screen: Sales ,
 		navigationOptions: {

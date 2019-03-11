@@ -49,7 +49,7 @@ export default class Router extends Component {
                     show_false: true, 
                     fail: 'Lỗi kết nối',
                     check_erro: 'Bạn hãy kiểm tra lại kết nối Internet hoặc Wifi',
-                })
+                }); console.warn(connectionInfo.type);
             }
           });
 

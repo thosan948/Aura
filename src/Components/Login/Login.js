@@ -168,7 +168,8 @@ export default class Login extends Component {
     handleClose = () => {
 
         this.setState({ 
-            show_false: false
+            show_false: false,
+            show_erro: false,
         })
 
     }
@@ -190,6 +191,16 @@ export default class Login extends Component {
                 check_Phone = this.state.emdn;			
                 check_Pass = this.state.passdn;
         
+
+                // this.setState({
+                //     visible: false,
+                //     fail: "9999999999",
+                //     check_erro: "7777 cần nhập đầy đủ tất cả các thông tin",
+                //     show_false: true
+                // });
+
+
+
                 if ( check_Phone == "" || check_Pass == "" ) {
         
                     this.setState({
@@ -209,6 +220,13 @@ export default class Login extends Component {
                     });
                     
                 }else{
+
+                    // this.setState({
+                    //     visible: false,
+                    //     fail: "aaaaaa",
+                    //     check_erro: "bbbbbb",
+                    //     show_erro: true
+                    // });
         
                     fetch("http://library.limcom.vn/API/login.php", {
         
@@ -267,6 +285,13 @@ export default class Login extends Component {
                                     image: info_image
                                 });
                                 this.gotoMain();
+
+                                // this.setState({
+                                //     visible: false,
+                                //     fail: "Đăng nhập thành công bbbbb",
+                                //     check_erro: "Bạn hãy kiểm tra lại kết nối Internet",
+                                //     show_false: true
+                                // });
         
                             } else if (responseJson.info.Result == "0") {				
                                 
@@ -293,13 +318,13 @@ export default class Login extends Component {
                     )
                     .catch((error) => {
         
-                            console.log(error)				
-                            this.setState({
-                                visible: false,
-                                fail: "Đăng nhập thất bại",
-                                check_erro: "Bạn hãy kiểm tra lại kết nối Internet",
-                                show_false: true
-                            });
+                            console.warn(error)				
+                            // this.setState({
+                            //     visible: false,
+                            //     fail: "0000 Đăng nhập thất bại",
+                            //     check_erro: "0000 Bạn hãy kiểm tra lại kết nối",
+                            //     show_false: true
+                            // });
         
                         }
         

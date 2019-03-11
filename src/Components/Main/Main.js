@@ -158,6 +158,9 @@ export default class Main extends Component {
     gotoStatus(){
         this.props.navigation.push('Status');
     };
+    gotoOrder(){
+        this.props.navigation.push('Order');
+    }
     gotoSetting(){
         this.props.navigation.push('Info',{
             onGetData: () => this.refresh(),
@@ -267,7 +270,7 @@ export default class Main extends Component {
 
                                     </TouchableOpacity>
 
-                                    <TouchableOpacity>
+                                    <TouchableOpacity onPress={() => this.gotoOrder()}>
 
                                         <ImageBackground                     
                                             source={ic_Click}
@@ -275,9 +278,9 @@ export default class Main extends Component {
 
                                             <Image source={ic_1} style={styles.icon}/>
 
-                                            <Text style = {styles.text_icon}>Chương trình</Text>
+                                            <Text style = {styles.text_icon}>Order</Text>
                                             
-                                            <Text style = {[styles.text_icon,{marginTop: -5}]}>khuyến mãi</Text>
+                                            {/* <Text style = {[styles.text_icon,{marginTop: -5}]}>khuyến mãi</Text> */}
                                             
                                         </ImageBackground>
 
@@ -326,7 +329,7 @@ export default class Main extends Component {
 
                                     </TouchableOpacity>
 
-                                    <TouchableOpacity onPress = {() => this.gotoShopping() }>
+                                    {/* <TouchableOpacity onPress = {() => this.gotoShopping() }>
 
                                         <ImageBackground                     
                                             source={ic_Click}
@@ -340,7 +343,7 @@ export default class Main extends Component {
 
                                         </ImageBackground>
 
-                                    </TouchableOpacity>
+                                    </TouchableOpacity> */}
 
                                     <TouchableOpacity onPress = {() => this.gotoStatus() }>
 

@@ -136,6 +136,9 @@ export default class Status extends Component {
         const { navigation } = this.props;
         navigation.pop();
         return true;
+    };
+    gotoWedview = (links) => {
+        this.props.navigation.push('MyWed', links);
     }
 
 
@@ -196,7 +199,7 @@ export default class Status extends Component {
                                                         <View style = {{marginBottom: 5, marginLeft: 5}}>
 
                                                             <TouchableOpacity 
-                                                                onPress={() => this.props.gotoWedview(links = item.url)}
+                                                                onPress={() => this.gotoWedview(links = item.url)}
                                                                 style = {{flexDirection: 'row', flex: 1}}>
 
                                                                 <View style = {{flex: 1}}>
@@ -231,7 +234,7 @@ export default class Status extends Component {
                                                         <View>
 
                                                             <TouchableOpacity 
-                                                                onPress={() => this.props.gotoWedview(links = item.url)}
+                                                                onPress={() => this.gotoWedview(links = item.url)}
                                                                 style = {{
                                                                     backgroundColor: '#fff', 
                                                                     borderRadius: 10,

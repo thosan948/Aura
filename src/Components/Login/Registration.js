@@ -72,7 +72,8 @@ export default class Registration extends Component {
     handleClose = () => {
 
         this.setState({ 
-            dn_show: false 
+            show_false: false,
+            show_true: false, 
         })
 
     };
