@@ -56,7 +56,7 @@ class StyleMain {
             fontFamily: "helveticaneue",
             color: '#6e5532',
             textAlign: 'center',
-            textDecorationLine: 'underline'
+            // textDecorationLine: 'underline'
         }
     })
 }

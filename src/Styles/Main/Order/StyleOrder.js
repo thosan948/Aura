@@ -38,7 +38,7 @@ class StyleOrder {
             paddingRight: 8,
         },
         view_TextInput: {
-            height: 30,
+            height: 40,
             borderRadius: 5,
             borderWidth: 1,
             borderColor: '#735934',

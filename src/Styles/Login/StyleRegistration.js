@@ -48,7 +48,7 @@ class StyleRegistration {
             fontSize: 16,
             marginTop:  deviceHeight*0.01,
             fontFamily: "helveticaneue",
-            textDecorationLine: 'underline'
+            // textDecorationLine: 'underline'
         },
 
         view_check:{
@@ -96,7 +96,7 @@ class StyleRegistration {
             color: '#fff',
             marginTop: 12,
             fontSize: 12,
-            textDecorationLine: 'underline'
+            // textDecorationLine: 'underline'
         },
         style_TextInput: {
             flex:1,
@@ -117,7 +117,8 @@ class StyleRegistration {
             textAlign : 'center',
             fontFamily: "helveticaneue",
             fontSize: 16,
-            textDecorationLine: 'underline'
+            fontWeight: 'bold',            
+            // textDecorationLine: 'underline'
         }
 
     });

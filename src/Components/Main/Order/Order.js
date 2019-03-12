@@ -532,7 +532,7 @@ export default class Order extends Component {
                                     </TouchableOpacity>
 
                                     <TextInput 
-                                        underlineColorAndroid='transparent'
+                                        // underlineColorAndroid='transparent'
                                         value={this.state.nameSP != "" ? this.state.sttSP : ""}
                                         onChangeText={(sttSP) => this.setState({ sttSP })}
                                         style = {styles.view_TextInput}>
@@ -992,6 +992,7 @@ export default class Order extends Component {
                         title="Thông tin chi tiết"
                         // message="Are you sure about that?"
                         visible={this.state.dialogCT}
+                        titleStyle = {{alignSelf: 'center'}}
                         contentStyle = {{padding: 10}}
                         onTouchOutside={() => {item_show = false; this.setState({dialogCT: false})}}
                         positiveButton={{
@@ -1010,7 +1011,7 @@ export default class Order extends Component {
                             </View>
 
                             <View style = {{flexDirection: 'row', marginTop: 5}}>
-                                <View style = {{backgroundColor: '#eee', width: "30%"}}>
+                                <View style = {{ width: "30%"}}>
                                     <Text> Tên SP-DV: </Text>  
                                 </View>
                                 <View style = {{ width: "70%"}}>
