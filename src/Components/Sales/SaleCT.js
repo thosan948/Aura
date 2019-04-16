@@ -7,6 +7,8 @@ import {
     TouchableOpacity,
     TextInput,
     Image,
+    AsyncStorage,
+    NetInfo,
     Dimensions,
     BackHandler,
     ToastAndroid,
@@ -44,8 +46,10 @@ export default class SaleCT extends Component {
         this.state = {
             dataSource: [],
             cus: cus,
+            get_id: '',
             show_true: false,
             title: title,
+            showok: false,
         };
 
     };
@@ -54,6 +58,7 @@ export default class SaleCT extends Component {
 
         BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
         this._LoadData();
+        this._GetData();
 
     };
 
@@ -68,6 +73,20 @@ export default class SaleCT extends Component {
         const { navigation } = this.props;
         navigation.pop();
         return true;
+
+    };
+
+    _GetData = async () => {
+
+
+        try {
+            var get_id = await AsyncStorage.getItem("@Id:key");
+            this.setState({
+                get_id: get_id,
+            });
+        } catch (error) {
+            console.log(error);
+        }
 
     };
 
@@ -118,7 +137,104 @@ export default class SaleCT extends Component {
         
         this.props.navigation.push('Custom', cus = 'Kaiser');
     };
+    _gotoOrder = (item) =>{
 
+        var dataFinal = [];
+        dataFinal.push({
+            brandname : item.brandname,
+            code : item.code,
+            donvi : item.donvi,
+            dongia : item.price,
+            soluong : 1,
+        });
+
+        // console.log(dataFinal);
+
+        NetInfo.getConnectionInfo().then((connectionInfo) => {
+            if(connectionInfo.type == "none"){
+                // console.log(connectionInfo.type)
+                this.setState({ 
+                    checkWifi: true,
+                    show_true: true, 
+                    fail: 'Lỗi kết nối',
+                    check_erro: 'Bạn hãy kiểm tra lại kết nối Internet hoặc Wifi',
+                });
+            } else {
+
+                if ( String(dataFinal) == '' || String(dataFinal) == null ) {
+        
+                    this.setState({
+                        visible: false,
+                        fail: "Đặt hàng thất bại",
+                        check_erro: "Vui lòng chọn sản phẩm hoặc dịch vụ mà bạn cần",
+                        show_true: true
+                    });
+                    
+                }else{
+
+                    fetch("http://library.limcom.vn/API/cusorder.php", {
+        
+                        method: "POST",
+        
+                        headers: {
+                            "Accept": "application/json",
+                            "Content-Type": "application/json",
+                        },
+        
+                        body: JSON.stringify({
+                            "ID": this.state.get_id,		// POST biến MAIL
+                            "LIST": dataFinal
+                        })
+        
+                    })
+        
+                    .then((response) => response.json())
+        
+                    .then((responseJson) => {
+    
+        
+                            if (responseJson.Connect == "1") {				
+                                
+                                dataFinal = [];
+
+                                this.setState({
+                                    visible: false,
+                                    nameSP: '',
+                                    nameDV: '',
+                                    fail: "Đặt hàng thành công",
+                                    check_erro: "Bạn đã đặt hàng thành công, chúng tôi sẽ liên hệ với bạn sau",
+                                    show_true: true
+                                });
+        
+                            }else{
+        
+                                this.setState({
+                                    visible: false,
+                                    fail: "Đặt hàng thất bại",
+                                    check_erro: "Bạn hãy kiểm tra lại kết nối Internet",
+                                    show_true: true
+                                });
+                                
+                            }
+        
+                        },
+        
+                    )
+                    .catch((error) => {
+        
+                            console.warn(error)				
+        
+                        }
+        
+                    );
+
+                }
+
+            }
+
+        });
+
+    };
     goBack(){
 
         const { navigation } = this.props;
@@ -126,6 +242,13 @@ export default class SaleCT extends Component {
         return true;
 
     };
+
+    handleOK = () => {
+        this.setState({ 
+            show_true: false,
+        })
+        this.props.navigation.push('LieuTrinh');
+    }
 
     handleClose = () => {
 
@@ -232,7 +355,7 @@ export default class SaleCT extends Component {
                                                         <View style = {{justifyContent: 'center'}}>
 
                                                             <TouchableOpacity 
-                                                                onPress={() => this.setState({show_true: true})}
+                                                                onPress={() => this._gotoOrder(item)}
                                                                 style = {styles.view_Datlich}>
 
                                                                 <Text style = {styles.txt_Datlich}>Đặt lịch ngay</Text>
@@ -277,7 +400,7 @@ export default class SaleCT extends Component {
                         title="Đặt lịch thành công"
                         subtitle="Chúc mừng bạn đã đặt lịch thành công">
 
-                        <SCLAlertButton theme="info" onPress={this.handleClose}>OK</SCLAlertButton>
+                        <SCLAlertButton theme="info" onPress={this.handleOK}>OK</SCLAlertButton>
                                 
 
                     </SCLAlert>

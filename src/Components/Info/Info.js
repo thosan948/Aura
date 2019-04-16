@@ -72,6 +72,61 @@ export default  class Info extends Component {
         BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress);
 
     }
+    gotoLogin = async () => {
+
+        try {
+            var get_checked = await AsyncStorage.getItem("@Check:key");
+
+            if(get_checked == "false"){
+
+                try {
+
+                    await AsyncStorage.setItem("@User:key", "");
+                    await AsyncStorage.setItem("@Login:key", "false");
+                    await AsyncStorage.setItem("@Pass:key", "");
+                    // await AsyncStorage.setItem("@Cusname:key", "");
+                    // await AsyncStorage.setItem("@Cusphone:key", this.state.cusphone);
+                    // await AsyncStorage.setItem("@Birthdate:key", this.state.birthdate);
+                    // await AsyncStorage.setItem("@Cmnd:key", this.state.cmnd);
+                    // await AsyncStorage.setItem("@Gender:key", this.state.gender);
+                    // await AsyncStorage.setItem("@Tinh:key", this.state.tinh);
+                    // await AsyncStorage.setItem("@Quan:key", this.state.quan);
+                    // await AsyncStorage.setItem("@Diachi:key", this.state.diachi);
+                    // await AsyncStorage.setItem("@Image:key", "");
+                    console.log("Remove ok")
+        
+                } catch (error) {
+        
+                    console.log(error);
+        
+                }
+
+                this.props.navigation.push('LoginMain');
+
+            } else {
+
+                try {
+
+                    await AsyncStorage.setItem("@Login:key", "false");
+                    console.log('false')
+        
+                } catch (error) {
+        
+                    console.log(error);
+        
+                }
+
+                this.props.navigation.push('LoginMain');
+
+            }
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
+    };
 
     goBack(){
         this.props.navigation.state.params.onGetData();
@@ -417,7 +472,9 @@ export default  class Info extends Component {
                                 </View>
 
 
-                            <TouchableOpacity style = { [styles.container, {marginBottom: deviceHeight * 0.05}] }>
+                            <TouchableOpacity 
+                                onPress = {() => this.gotoLogin()}
+                                style = { [styles.container, {marginBottom: deviceHeight * 0.05}] }>
                                 <LinearGradient 
                                     start={{ x: 0, y: 0 }}
                                     end={{ x: 1, y: 1 }}

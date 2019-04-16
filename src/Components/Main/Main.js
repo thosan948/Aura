@@ -19,7 +19,7 @@ import ic_Logo from '../../Media/Logo/6.png';
 import ic_Click from '../../Media/Icon/bg.png';
 import ic_7 from '../../Media/Icon/7.png';
 import ic_1 from '../../Media/Icon/1.png';
-import ic_2 from '../../Media/Icon/2.png';
+import ic_2 from '../../Media/Icon/ic_logomap.png';
 import ic_3 from '../../Media/Icon/3.png';
 import ic_4 from '../../Media/Icon/4.png';
 import ic_5 from '../../Media/Icon/5.png';
@@ -184,7 +184,6 @@ export default class Main extends Component {
                 get_name: get_name,
                 get_code: get_code,
             });
-        console.warn('Kaiser:  ' + this.state.get_img);
         } catch (error) {
             console.log(error);
         }
@@ -292,9 +291,9 @@ export default class Main extends Component {
                                             source={ic_Click}
                                             style={styles.view_Click}>
                                             
-                                            <Image source={ic_2} style={[styles.icon,{width: 80}]}/>
+                                            <Image source={ic_2} style={[styles.icon,{width: 60, height: 60}]}/>
 
-                                            <Text style = {styles.text_icon}>Phản hồi</Text>
+                                            <Text style = {styles.text_icon}>Địa chỉ</Text>
 
                                             <Text style = {[styles.text_icon,{marginTop: -5}]}></Text>
 

@@ -16,7 +16,7 @@ import ic_setting from '../../../Media/Icon/setting.png';
 
 // Import Dependencies
 import LinearGradient from 'react-native-linear-gradient';
-
+import Maps from '../Maps/Maps';
 // Import Components
 import Header from '../Header/Header';
 
@@ -169,7 +169,7 @@ export default class Status extends Component {
                             <Header gotoBack={this.goBack.bind(this)} />
 
                             {/* {Comment} */}
-                            {CheckPass}
+                            <Maps/>
 
                         </View>
 

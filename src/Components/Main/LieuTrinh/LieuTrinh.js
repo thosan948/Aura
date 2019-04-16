@@ -268,7 +268,7 @@ export default class Status extends Component {
                                             </View>
 
                                             <FlatList
-                                                style = {{height: deviceHeight * 0.55}}
+                                                style = {{height: deviceHeight * 0.75}}
                                                 data={this.state.dataSource}
                                                 showsVerticalScrollIndicator={false}
                                                 keyExtractor={item => item.id}

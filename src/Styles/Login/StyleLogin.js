@@ -1,9 +1,9 @@
 import { Dimensions, StyleSheet } from 'react-native';
 
-var deviceHeight  = Dimensions.get('window').height;
+var deviceHeight = Dimensions.get('window').height;
 var deviceWidth = Dimensions.get("window").width;
 
-class StyleLogin{
+class StyleLogin {
 
     static styleLogin = StyleSheet.create({
 
@@ -12,37 +12,38 @@ class StyleLogin{
             flex: 1,
         },
 
-        view_Main:{
+        view_Main: {
             flex: 1,
             alignSelf: 'center',
             justifyContent: 'center'
+
         },
-    
+
         view_DN: {
             alignSelf: "center",
             height: 35,
-            width: deviceWidth* 0.6,
+            width: deviceWidth * 0.6,
             backgroundColor: "#ffffff",
             borderRadius: 180,
             justifyContent: 'center',
-            marginTop: deviceHeight*0.05,
+            marginTop: deviceHeight * 0.05,
         },
-        view_DK:{
+        view_DK: {
             // backgroundColor: '#fff',
-            alignSelf:'center',
+            alignSelf: 'center',
             width: 100,
         },
-    
+
         text_DK: {
             textAlign: 'center',
             color: "#fff",
             fontSize: 16,
-            marginTop:  deviceHeight*0.01,
+            marginTop: deviceHeight * 0.01,
             fontWeight: 'bold',
             fontFamily: "helveticaneue",
             // textDecorationLine: 'underline'
         },
-    
+
         fromDN: {
             width: deviceWidth * .7,
             flexDirection: 'row',
@@ -52,24 +53,24 @@ class StyleLogin{
             borderColor: '#fff',
             marginBottom: 5,
         },
-    
-        view_check:{
+
+        view_check: {
             width: deviceWidth * 0.7,
             height: 30,
             flexDirection: 'row',
             justifyContent: 'space-between',
-    
+
         },
-    
+
         ImageStyle: {
             padding: 10,
             margin: 10,
             height: 10,
             width: 10,
-            resizeMode : 'stretch',
+            resizeMode: 'stretch',
             alignItems: 'center'
         },
-    
+
         image_logo: {
             alignSelf: "center",
             width: 100,
@@ -77,19 +78,19 @@ class StyleLogin{
         },
         image_bg: {
             alignSelf: "center",
-            marginTop:  deviceHeight*0.01,
+            marginTop: deviceHeight * 0.01,
             width: 200,
-            height: 200*150/400,
+            height: 200 * 150 / 400,
         },
-    
-        text_NTK:{
+
+        text_NTK: {
             fontFamily: "helveticaneue",
             color: '#fff',
             marginTop: 13,
             marginLeft: -7,
             fontSize: 13,
         },
-        text_QMK:{
+        text_QMK: {
             fontFamily: "helveticaneue",
             color: '#fff',
             marginTop: 13,
@@ -105,19 +106,19 @@ class StyleLogin{
             color: '#fff',
             fontFamily: "helveticaneue",
         },
-    
-        view_input:{
+
+        view_input: {
             alignSelf: 'center',
         },
-    
-        text_DN:{
-            textAlign : 'center',
+
+        text_DN: {
+            textAlign: 'center',
             fontWeight: 'bold',
             fontFamily: "helveticaneue",
             fontSize: 16,
             // textDecorationLine: 'underline'
         }
-    
+
     });
 }
 export default StyleLogin;

@@ -18,8 +18,16 @@ import Sales from '../Components/Sales/Sales';
 import SaleCT from '../Components/Sales/SaleCT';
 import Shopping from '../Components/Main/Shopping/Shopping';
 import Order from '../Components/Main/Order/Order';
+import Maps from '../Components/Main/Maps/Maps';
 
 const MainNavigator = createStackNavigator({
+
+	// Maps: {
+	// 	screen: Maps ,
+	// 	navigationOptions: {
+	// 		header: null ,
+	// 	}
+	// },
 	
 	Intro: {
 		screen: Intro ,

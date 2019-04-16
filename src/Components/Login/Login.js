@@ -20,11 +20,13 @@ import {
 import ic_Background from '../../Media/Background/BackgroundLogin.png';
 import ic_logo from '../../Media/Logo/aura.png';
 import ic_bg from '../../Media/Background/bg.png';
+import { LoginButton,AccessToken,GraphRequest,GraphRequestManager} from 'react-native-fbsdk';
 import ic_user from '../../Media/Icon/ic_user.png';
 import ic_lock from '../../Media/Icon/lock.png';
 
 
 // Import Dependencies
+import MapView from 'react-native-maps';
 import {
     SCLAlert,
     SCLAlertButton,
@@ -35,6 +37,11 @@ import OpenSettings from 'react-native-open-settings';
 
 import StyleLogin from '../../Styles/Login/StyleLogin';
 const styles = StyleLogin.styleLogin;
+const FBSDK = require('react-native-fbsdk');
+const {
+  LoginManager,
+} = FBSDK;
+ 
 
 export default class Login extends Component {
 
@@ -190,16 +197,6 @@ export default class Login extends Component {
 
                 check_Phone = this.state.emdn;			
                 check_Pass = this.state.passdn;
-        
-
-                // this.setState({
-                //     visible: false,
-                //     fail: "9999999999",
-                //     check_erro: "7777 cần nhập đầy đủ tất cả các thông tin",
-                //     show_false: true
-                // });
-
-
 
                 if ( check_Phone == "" || check_Pass == "" ) {
         
@@ -220,13 +217,6 @@ export default class Login extends Component {
                     });
                     
                 }else{
-
-                    // this.setState({
-                    //     visible: false,
-                    //     fail: "aaaaaa",
-                    //     check_erro: "bbbbbb",
-                    //     show_erro: true
-                    // });
         
                     fetch("http://library.limcom.vn/API/login.php", {
         
@@ -248,18 +238,20 @@ export default class Login extends Component {
         
                     .then((responseJson) => {
         
-                            if (responseJson.info.Result == "1") {					
-                                info_id = responseJson.info.id;					
-                                info_cuscode = responseJson.info.cuscode;			
-                                info_cusname = responseJson.info.cusname;
-                                info_cusphone = responseJson.info.cusphone;
-                                info_birthdate = responseJson.info.birthdate;
-                                info_cmnd = responseJson.info.cmnd;
-                                info_gender = responseJson.info.gender;
-                                info_tinh = responseJson.info.tinh;
-                                info_diachi = responseJson.info.diachi;
-                                info_quan = responseJson.info.quan;
-                                info_image = responseJson.info.image;
+                            if (responseJson.info.Result == "1") {
+                                const info = responseJson.info;
+
+                                info_id = info.id;					
+                                info_cuscode = info.cuscode;			
+                                info_cusname = info.cusname;
+                                info_cusphone = info.cusphone;
+                                info_birthdate = info.birthdate;
+                                info_cmnd = info.cmnd;
+                                info_gender = info.gender;
+                                info_tinh = info.tinh;
+                                info_diachi = info.diachi;
+                                info_quan = info.quan;
+                                info_image = info.image;
                                 console.log(info_diachi)
                                 
                                 if(info_diachi == null){
@@ -285,13 +277,6 @@ export default class Login extends Component {
                                     image: info_image
                                 });
                                 this.gotoMain();
-
-                                // this.setState({
-                                //     visible: false,
-                                //     fail: "Đăng nhập thành công bbbbb",
-                                //     check_erro: "Bạn hãy kiểm tra lại kết nối Internet",
-                                //     show_false: true
-                                // });
         
                             } else if (responseJson.info.Result == "0") {				
                                 
@@ -319,12 +304,12 @@ export default class Login extends Component {
                     .catch((error) => {
         
                             console.warn(error)				
-                            // this.setState({
-                            //     visible: false,
-                            //     fail: "0000 Đăng nhập thất bại",
-                            //     check_erro: "0000 Bạn hãy kiểm tra lại kết nối",
-                            //     show_false: true
-                            // });
+                            this.setState({
+                                visible: false,
+                                fail: "Đăng nhập thất bại",
+                                check_erro: "Bạn hãy kiểm tra lại kết nối",
+                                show_false: true
+                            });
         
                         }
         
@@ -336,15 +321,24 @@ export default class Login extends Component {
 
         });
 
-
-
     }
     
     Click(){
         this.setState({ click: !this.state.click });
     }
 
+
+
     render() {
+
+        const afterLoginComplete = async (token) => {
+            const response = await fetch(
+                `https://graph.facebook.com/me?fields=id,name,first_name,last_name,gender,picture,cover&access_token=${token}`);
+            let result = await response.json();
+            console.warn(result.friendlists);
+        
+            // use this result as per the requirement
+        };
 
         const { checked } = this.state;
 
@@ -465,6 +459,25 @@ export default class Login extends Component {
 
                             </TouchableOpacity>
 
+                            {/* <LoginButton
+                                onLoginFinished={
+                                    (error, result) => {
+                                    if (error) {
+                                        console.log("login has error: " + result.error);
+                                    } else if (result.isCancelled) {
+                                        console.log("login is cancelled.");
+                                    } else {
+                                        AccessToken.getCurrentAccessToken().then(
+                                        (data) => {
+                                            console.log(data.accessToken.toString())
+                                            afterLoginComplete(token = data.accessToken);
+                                        }
+                                        )
+                                    }
+                                    }
+                                }
+                                onLogoutFinished={() => console.log("logout.")}/> */}
+ 
                             <Spinner visible={this.state.visible} />
 
                             <SCLAlert
@@ -480,6 +493,8 @@ export default class Login extends Component {
 
                         </View>
 
+
+
                     </ScrollView>
 
                 </ImageBackground>
@@ -489,5 +504,6 @@ export default class Login extends Component {
         );
 
     }
+
 
 }

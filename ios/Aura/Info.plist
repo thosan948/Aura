@@ -20,10 +20,28 @@
 	<string>1.0</string>
 	<key>CFBundleSignature</key>
 	<string>????</string>
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb2238020116255421</string>
+			</array>
+		</dict>
+	</array>
 	<key>CFBundleVersion</key>
-	<string>7</string>
-	<key>LSApplicationCategoryType</key>
-	<string></string>
+	<string>30</string>
+	<key>FacebookAppID</key>
+	<string>2238020116255421</string>
+	<key>FacebookDisplayName</key>
+	<string>Aura</string>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
+	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSAppTransportSecurity</key>
@@ -31,18 +49,24 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Users need to provide access right of Bluetooth to transmit and receive data.</string>
 	<key>NSCameraUsageDescription</key>
-	<string></string>
-	<key>NSFaceIDUsageDescription</key>
-	<string>My description about why I need this capability</string>
-	<key>NSHomeKitUsageDescription</key>
-	<string>My description about why I need this capability</string>
+	<string>Users need to provide access right of camera to update their profiles.</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Users need to provide exactly their location, so the app supports finding the nearest store.</string>
+	<key>NSLocationUsageDescription</key>
+	<string>Users need to provide exactly their location, so the app supports finding the nearest store.</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Users need to provide exactly their location, so the app supports finding the nearest store.</string>
+	<key>NSMainNibFile</key>
+	<string>LaunchScreen</string>
+	<key>NSMainNibFile~ipad</key>
+	<string>LaunchScreen</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>My description about why I need this capability</string>
+	<string>Users need to provide access right of photo albums to update their profiles.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>My description about why I need this capability</string>
+	<string>Users need to provide access right of photo albums to update their profiles.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>helveticaneue.ttf</string>
@@ -81,5 +105,18 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UTExportedTypeDeclarations</key>
+	<array>
+		<dict>
+			<key>UTTypeConformsTo</key>
+			<array>
+				<string></string>
+			</array>
+			<key>UTTypeIdentifier</key>
+			<string></string>
+			<key>UTTypeTagSpecification</key>
+			<dict/>
+		</dict>
+	</array>
 </dict>
 </plist>
